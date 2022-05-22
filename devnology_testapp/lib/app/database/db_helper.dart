@@ -33,16 +33,14 @@ class DbHelper {
     return cartItemListFound;
   }
 
-  Future<void> updateDog(Cart cart) async {
+  Future<void> updateCart(Cart cart) async {
     final database = await db;
 
-    // Update the given Dog.
+    // Update the given Item in Cart.
     await database.update(
-      'dogs',
+      AppDbNames.storageTable,
       cart.toMap(),
-      // Ensure that the Dog has a matching id.
       where: 'id = ?',
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [cart.id],
     ).then((value) => print('int from update: $value'));
   }
