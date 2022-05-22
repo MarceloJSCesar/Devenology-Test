@@ -28,7 +28,7 @@ class Db {
     return await openDatabase(path, version: 1,
         onCreate: (database, newerVersion) async {
       await database.execute(
-        'CREATE TABLE ${AppDbNames.storageTable}(${AppDbNames.id} INTEGER PRIMARY KEY, ${AppDbNames.email} TEXT, ${AppDbNames.password} TEXT, ${AppDbNames.name} TEXT, ${AppDbNames.school} TEXT, ${AppDbNames.sexuality} TEXT)',
+        'CREATE TABLE ${AppDbNames.storageTable}(${AppDbNames.id} INTEGER PRIMARY KEY, ${AppDbNames.itemImg} TEXT, ${AppDbNames.itemLabel} TEXT, ${AppDbNames.itemPrice} REAL, ${AppDbNames.itemQuantity} REAL)',
       );
     });
   }
