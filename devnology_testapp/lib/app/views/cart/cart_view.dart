@@ -3,7 +3,6 @@ import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/cart/body/cart_body.dart';
-import '../../models/cart.dart';
 
 class CartView extends StatefulWidget {
   static int cartPageIndex = 2;
@@ -33,9 +32,9 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData) {
-                final List<Cart> cartList = snapshot.data as List<Cart>;
+                print(snapshot.data);
                 return CartBody(
-                  cartList: cartList,
+                  cartList: snapshot.data,
                 );
               } else {
                 return const Center(

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:devnology_testapp/app/models/cart.dart';
+import '../models/cart.dart';
 
 import '../config/app_dbnames.dart';
 import 'db.dart';
@@ -26,11 +26,11 @@ class DbHelper {
         where: '${AppDbNames.id} = ?', whereArgs: [id]);
   }
 
-  Future<List> getAllItems() async {
+  Future<List<Cart>> getAllItems() async {
     Database database = await db;
     List<Map> cartItemListFound =
         await database.rawQuery('SELECT * FROM ${AppDbNames.storageTable}');
-    List cartItemList = [];
+    List<Cart> cartItemList = [];
     for (Map cart in cartItemListFound) {
       cartItemList.add(Cart.fromMap(cart));
     }
