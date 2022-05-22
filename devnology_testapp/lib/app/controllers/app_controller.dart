@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import '../models/cart.dart';
+
 part 'app_controller.g.dart';
 
 class AppController = AppControllerBase with _$AppController;
@@ -11,8 +13,21 @@ abstract class AppControllerBase with Store {
   @observable
   int cartListNum = 0;
 
+  @observable
+  double totalPrice = 0.0;
+
   @action
-  int incrementItemQuantity(int itemQuantity) {
+  double calculateTotalPrice(List<Cart> cartList) {
+    for (final cart in cartList) {
+      totalPrice += cart.itemPrice * cart.itemQuantity;
+    }
+    return totalPrice;
+  }
+
+  @action
+  int incrementItemQuantity(
+    int itemQuantity,
+  ) {
     quantity++;
     itemQuantity = quantity;
     return itemQuantity;

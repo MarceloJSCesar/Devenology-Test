@@ -1,12 +1,14 @@
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../config/app_fonts.dart';
 
 class CartItemTotalInfo extends StatelessWidget {
-  final double total;
+  final AppController appController;
   const CartItemTotalInfo({
     Key? key,
-    required this.total,
+    required this.appController,
   }) : super(key: key);
 
   @override
@@ -23,9 +25,11 @@ class CartItemTotalInfo extends StatelessWidget {
                 'Total',
                 style: AppFonts.cartTotalLabel,
               ),
-              Text(
-                '\$ $total',
-                style: AppFonts.cartTotalPrice,
+              Observer(
+                builder: (_) => Text(
+                  '\$ ${appController.totalPrice}',
+                  style: AppFonts.cartTotalPrice,
+                ),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_img_item
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_checkout_button.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_info.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_total_info.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
 
@@ -20,14 +21,7 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // for testing
-    double calculateTotalPrice() {
-      double totalPrice = 0;
-      for (final cart in cartList) {
-        totalPrice += cart.itemPrice * cart.itemQuantity;
-      }
-      return totalPrice;
-    }
+    AppController appController = AppController();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -76,7 +70,9 @@ class CartBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              CartItemTotalInfo(total: calculateTotalPrice()),
+              CartItemTotalInfo(
+                appController: appController,
+              ),
               CartItemCheckoutButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
@@ -95,104 +91,3 @@ class CartBody extends StatelessWidget {
     );
   }
 }
-
-/* 
-Column(
-                      children: List.generate(
-                    cartList.length,
-                    (index) => Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      child: Row(
-                        children: <Widget>[
-                          CartItemImg(
-                            itemImgPath: cartList[index].itemImg,
-                          ),
-                          CartItemInfo(
-                            id: cartList[index].id as int,
-                            label: cartList[index].itemLabel,
-                            price: cartList[index].itemPrice,
-                            numQuantity: cartList[index].itemQuantity,
-                          ),
-                        ],
-                      ),
-                    ),
-                  )),
-*/
-
-/*
-
-CustomScrollView(
-      slivers: <Widget>[
-        SliverFillRemaining(
-          hasScrollBody: false,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const BoldTitle(
-                  title: 'Cart',
-                  marginTop: 30,
-                  marginBottom: 20,
-                ),
-                ListView.builder(
-                  itemCount: cartList.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      child: Row(
-                        children: <Widget>[
-                          CartItemImg(
-                            itemImgPath: cartList[index].itemImg,
-                          ),
-                          CartItemInfo(
-                            id: cartList[index].id as int,
-                            label: cartList[index].itemLabel,
-                            price: cartList[index].itemPrice,
-                            numQuantity: cartList[index].itemQuantity,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliverFillRemaining(
-          hasScrollBody: false,
-          child: Column(
-            children: <Widget>[
-              Expanded(child: Container()),
-              Container(
-                height: 86,
-                color: AppColors.secondary,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    CartItemTotalInfo(total: calculateTotalPrice()),
-                    CartItemCheckoutButton(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(CheckoutView.checkoutkey);
-                        List.generate(
-                          cartList.length,
-                          (index) async => await DbHelper()
-                              .delete(cartList[index].id as int),
-                        );
-                      },
-                      itemArrowRightImg: AppAssets.arrowRight,
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-
-*/

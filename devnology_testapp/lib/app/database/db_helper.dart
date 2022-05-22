@@ -32,4 +32,18 @@ class DbHelper {
         await database.rawQuery('SELECT * FROM ${AppDbNames.storageTable}');
     return cartItemListFound;
   }
+
+  Future<void> updateDog(Cart cart) async {
+    final database = await db;
+
+    // Update the given Dog.
+    await database.update(
+      'dogs',
+      cart.toMap(),
+      // Ensure that the Dog has a matching id.
+      where: 'id = ?',
+      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      whereArgs: [cart.id],
+    ).then((value) => print('int from update: $value'));
+  }
 }
