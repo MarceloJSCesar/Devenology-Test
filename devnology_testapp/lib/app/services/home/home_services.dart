@@ -8,7 +8,6 @@ class HomeServices {
     final String response =
         await rootBundle.loadString(AppAssets.latestItemsJson);
     final data = json.decode(response);
-    print(data['latest_items'].toString());
     return data['latest_items'];
   }
 }

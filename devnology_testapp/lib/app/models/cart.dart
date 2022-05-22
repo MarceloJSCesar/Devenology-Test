@@ -1,9 +1,11 @@
+import '../config/app_dbnames.dart';
+
 class Cart {
-  final int id;
-  final String itemImg;
-  final int itemQuantity;
-  final String itemLabel;
-  final double itemPrice;
+  late int? id;
+  late String itemImg;
+  late int itemQuantity;
+  late String itemLabel;
+  late double itemPrice;
 
   Cart({
     required this.id,
@@ -13,14 +15,25 @@ class Cart {
     required this.itemQuantity,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'itemImg': itemImg,
-      'itemLabel': itemLabel,
-      'itemPrice': itemPrice,
-      'itemQuatity': itemQuantity,
+  Cart.fromMap(Map map) {
+    id = map[AppDbNames.id];
+    itemImg = map[AppDbNames.itemImg];
+    itemLabel = map[AppDbNames.itemLabel];
+    itemPrice = map[AppDbNames.itemPrice];
+    itemQuantity = map[AppDbNames.itemQuantity];
+  }
+
+  Map toMap() {
+    Map<String, dynamic> map = {
+      AppDbNames.itemImg: itemImg,
+      AppDbNames.itemLabel: itemLabel,
+      AppDbNames.itemPrice: itemPrice,
+      AppDbNames.itemQuantity: itemQuantity,
     };
+    if (id != null) {
+      map[AppDbNames.id] = id;
+    }
+    return map;
   }
 
   @override
