@@ -8,6 +8,7 @@ import 'package:devnology_testapp/app/views/checkout/checkout_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/app_colors.dart';
+import '../../../database/db_helper.dart';
 import '../../bold_title.dart';
 
 class CartBody extends StatelessWidget {
@@ -84,6 +85,10 @@ class CartBody extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(CheckoutView.checkoutkey);
+                        List.generate(
+                            cartList.length,
+                            (index) async => await DbHelper()
+                                .delete(cartList[index].id as int));
                       },
                       itemArrowRightImg: AppAssets.arrowRight,
                     )
