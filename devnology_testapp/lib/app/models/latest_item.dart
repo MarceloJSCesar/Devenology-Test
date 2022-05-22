@@ -1,13 +1,13 @@
 class LatestItem {
-  final int id;
-  final String img;
-  final String label;
-  final double price;
-  final double cardWidth;
-  final double paddingTop;
-  final double marginLeft;
-  final double cardHeight;
-  final String description;
+  late int id;
+  late String img;
+  late String label;
+  late double price;
+  late double cardWidth;
+  late double paddingTop;
+  late double marginLeft;
+  late double cardHeight;
+  late String description;
 
   LatestItem({
     required this.id,
@@ -20,4 +20,16 @@ class LatestItem {
     required this.cardHeight,
     required this.description,
   });
+
+  LatestItem.fromMap(Map map) {
+    id = map['id'];
+    img = map['img'];
+    label = map['label'];
+    price = map['price'];
+    cardWidth = map['cardWidth'];
+    paddingTop = map['paddingTop'];
+    marginLeft = map['marginLeft'];
+    cardHeight = map['cardHeight'];
+    description = map['description'];
+  }
 }

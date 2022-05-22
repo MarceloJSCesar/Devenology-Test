@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/latest_item.dart';
 import '../../../../views/details/details_view.dart';
 import '../../latest_component.dart';
 
@@ -24,7 +25,7 @@ class LatestItems extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => DetailsView(
-                  latestItem: latestItems[index],
+                  latestItem: LatestItem.fromMap(latestItems[index]),
                 ),
               ),
             ),
