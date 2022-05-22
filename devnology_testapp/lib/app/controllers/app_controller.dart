@@ -20,7 +20,7 @@ abstract class AppControllerBase with Store {
 
   @action
   int decrementItemQuantity(int itemQuantity) {
-    quantity++;
+    quantity--;
     itemQuantity = quantity;
     return itemQuantity;
   }
