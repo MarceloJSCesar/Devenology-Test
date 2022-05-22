@@ -24,7 +24,6 @@ class DetailsView extends StatefulWidget {
 class _DetailsViewState extends State<DetailsView> {
   int sliderImgIndex = 0;
   final List<String> sliderImgList = <String>[];
-  final PageController _pageController = PageController();
 
   @override
   void initState() {
