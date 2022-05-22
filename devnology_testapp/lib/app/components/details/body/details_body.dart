@@ -2,6 +2,9 @@ import 'package:devnology_testapp/app/components/details/body/widgets/details_bo
 import 'package:devnology_testapp/app/components/details/body/widgets/details_img_slider.dart';
 import 'package:devnology_testapp/app/components/details/body/widgets/details_img_slider_dots.dart';
 import 'package:devnology_testapp/app/components/details/body/widgets/details_item_label.dart';
+import 'package:devnology_testapp/app/database/db_helper.dart';
+import 'package:devnology_testapp/app/models/cart.dart';
+import 'package:devnology_testapp/app/models/latest_item.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/app_assets.dart';
@@ -10,17 +13,13 @@ import '../../../config/app_fonts.dart';
 import '../../../views/cart/cart_view.dart';
 
 class DetailsBody extends StatelessWidget {
-  final double price;
-  final String itemLabel;
   final int sliderImgIndex;
-  final String description;
+  final LatestItem latestItem;
   final Function onPageChanged;
   final List<String> sliderImgList;
   const DetailsBody({
     Key? key,
-    required this.price,
-    required this.itemLabel,
-    required this.description,
+    required this.latestItem,
     required this.onPageChanged,
     required this.sliderImgList,
     required this.sliderImgIndex,
@@ -28,6 +27,9 @@ class DetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // create for a while
+    int itemQuantity = 0;
+    final dbHelper = DbHelper();
     return Column(
       children: <Widget>[
         Expanded(
@@ -42,7 +44,7 @@ class DetailsBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  DetailsItemLabel(label: itemLabel),
+                  DetailsItemLabel(label: latestItem.label),
                   DetailsImgSlider(
                     onPageChanged: (pageIndex) => onPageChanged(pageIndex),
                     sliderImgList: sliderImgList,
@@ -56,7 +58,7 @@ class DetailsBody extends StatelessWidget {
                     style: AppFonts.detailsLabel,
                   ),
                   Text(
-                    '\$ $price',
+                    '\$ ${latestItem.price}',
                     style: AppFonts.detailsPrice,
                   ),
                   Container(
@@ -73,7 +75,7 @@ class DetailsBody extends StatelessWidget {
                     width: 333,
                     height: 144,
                     child: Text(
-                      description,
+                      latestItem.description,
                       style: AppFonts.detailsDescription,
                     ),
                   ),
@@ -108,7 +110,14 @@ class DetailsBody extends StatelessWidget {
                       color: AppColors.primary,
                       label: 'ADD TO CART',
                       onTap: () {
-                        // add this item to database, and pop to jumpTo cartviewpageindex
+                        final cart = Cart(
+                          id: latestItem.id,
+                          itemImg: latestItem.img,
+                          itemLabel: latestItem.label,
+                          itemPrice: latestItem.price,
+                          itemQuantity: itemQuantity + 1,
+                        );
+                        dbHelper.addItemToCart(cart);
                         Navigator.of(context).pushNamed(CartView.cartkey);
                       },
                       assetImg: AppAssets.arrowRight,

@@ -1,20 +1,15 @@
 import 'package:devnology_testapp/app/components/details/appbar/details_appbar.dart';
 import 'package:devnology_testapp/app/components/details/body/details_body.dart';
 import 'package:devnology_testapp/app/config/app_colors.dart';
+import 'package:devnology_testapp/app/models/latest_item.dart';
 import 'package:flutter/material.dart';
 
 class DetailsView extends StatefulWidget {
   static String detailskey = 'DETAILSKEY';
-  final String? img;
-  final double? price;
-  final String? label;
-  final String? description;
+  final LatestItem? latestItem;
   const DetailsView({
     Key? key,
-    this.img,
-    this.label,
-    this.price,
-    this.description,
+    this.latestItem,
   }) : super(key: key);
 
   @override
@@ -29,9 +24,9 @@ class _DetailsViewState extends State<DetailsView> {
   void initState() {
     super.initState();
     final imgList = [
-      widget.img as String,
-      widget.img as String,
-      widget.img as String,
+      widget.latestItem!.img,
+      widget.latestItem!.img,
+      widget.latestItem!.img,
     ];
     sliderImgList.addAll(imgList);
   }
@@ -45,9 +40,7 @@ class _DetailsViewState extends State<DetailsView> {
         child: DetailsAppBar(),
       ),
       body: DetailsBody(
-        price: widget.price as double,
-        itemLabel: widget.label as String,
-        description: widget.description as String,
+        latestItem: widget.latestItem as LatestItem,
         onPageChanged: (pageIndex) => setState(
           () {
             sliderImgIndex = pageIndex;

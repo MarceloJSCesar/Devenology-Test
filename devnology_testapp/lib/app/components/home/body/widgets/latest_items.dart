@@ -24,10 +24,7 @@ class LatestItems extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => DetailsView(
-                  img: latestItems[index]['img'] as String,
-                  label: latestItems[index]['label'] as String,
-                  price: latestItems[index]['price'] as double,
-                  description: latestItems[index]['description'] as String,
+                  latestItem: latestItems[index],
                 ),
               ),
             ),

@@ -2,6 +2,8 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_img_item
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_checkout_button.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_info.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_total_info.dart';
+import 'package:devnology_testapp/app/config/app_assets.dart';
+import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:devnology_testapp/app/views/checkout/checkout_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,24 +11,23 @@ import '../../../config/app_colors.dart';
 import '../../bold_title.dart';
 
 class CartBody extends StatelessWidget {
-  final double price;
-  final String label;
-  final int numQuantity;
-  final double totalPrice;
-  final String itemImgPath;
-  final String itemArrowRightImg;
+  final List<Cart> cartList;
   const CartBody({
     Key? key,
-    required this.price,
-    required this.label,
-    required this.totalPrice,
-    required this.numQuantity,
-    required this.itemImgPath,
-    required this.itemArrowRightImg,
+    required this.cartList,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // for testing
+    double calculateTotalPrice() {
+      double totalPrice = 0;
+      for (final cart in cartList) {
+        totalPrice += cart.itemPrice * cart.itemQuantity;
+      }
+      return totalPrice;
+    }
+
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -41,29 +42,25 @@ class CartBody extends StatelessWidget {
                   marginBottom: 20,
                 ),
                 // card item, this builder list according to items added into cart
-                SizedBox(
-                  child: Row(
-                    children: <Widget>[
-                      CartItemImg(itemImgPath: itemImgPath),
-                      CartItemInfo(
-                        label: label,
-                        price: price,
-                        numQuantity: numQuantity,
-                      ),
-                    ],
-                  ),
-                ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  child: Row(
-                    children: <Widget>[
-                      CartItemImg(itemImgPath: itemImgPath),
-                      CartItemInfo(
-                        label: label,
-                        price: price,
-                        numQuantity: numQuantity,
-                      ),
-                    ],
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView.builder(
+                    itemCount: cartList.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: <Widget>[
+                          CartItemImg(
+                            itemImgPath: cartList[index].itemImg,
+                          ),
+                          CartItemInfo(
+                            label: cartList[index].itemLabel,
+                            price: cartList[index].itemPrice,
+                            numQuantity: cartList[index].itemQuantity,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ],
@@ -83,13 +80,13 @@ class CartBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CartItemTotalInfo(total: totalPrice),
+                    CartItemTotalInfo(total: calculateTotalPrice()),
                     CartItemCheckoutButton(
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(CheckoutView.checkoutkey);
                       },
-                      itemArrowRightImg: itemArrowRightImg,
+                      itemArrowRightImg: AppAssets.arrowRight,
                     )
                   ],
                 ),
