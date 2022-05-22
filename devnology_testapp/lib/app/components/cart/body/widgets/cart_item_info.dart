@@ -52,7 +52,6 @@ class CartItemInfo extends StatelessWidget {
                 onTap: () async {
                   appController.decrementItemQuantity(
                     cartItem.itemQuantity,
-                    cartList,
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);
@@ -86,7 +85,6 @@ class CartItemInfo extends StatelessWidget {
                 onTap: () async {
                   appController.incrementItemQuantity(
                     cartItem.itemQuantity,
-                    cartList,
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);

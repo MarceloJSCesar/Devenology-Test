@@ -61,7 +61,7 @@ mixin _$AppController on AppControllerBase, Store {
       ActionController(name: 'AppControllerBase', context: context);
 
   @override
-  void calculateTotalPrice(List<Cart> cartList) {
+  double calculateTotalPrice(List<Cart> cartList) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
         name: 'AppControllerBase.calculateTotalPrice');
     try {
@@ -72,22 +72,22 @@ mixin _$AppController on AppControllerBase, Store {
   }
 
   @override
-  int incrementItemQuantity(int itemQuantity, List<Cart> cartList) {
+  int incrementItemQuantity(int itemQuantity) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
         name: 'AppControllerBase.incrementItemQuantity');
     try {
-      return super.incrementItemQuantity(itemQuantity, cartList);
+      return super.incrementItemQuantity(itemQuantity);
     } finally {
       _$AppControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  int decrementItemQuantity(int itemQuantity, List<Cart> cartList) {
+  int decrementItemQuantity(int itemQuantity) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
         name: 'AppControllerBase.decrementItemQuantity');
     try {
-      return super.decrementItemQuantity(itemQuantity, cartList);
+      return super.decrementItemQuantity(itemQuantity);
     } finally {
       _$AppControllerBaseActionController.endAction(_$actionInfo);
     }

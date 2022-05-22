@@ -17,17 +17,16 @@ abstract class AppControllerBase with Store {
   int cartListNum = 0;
 
   @action
-  void calculateTotalPrice(List<Cart> cartList) {
+  double calculateTotalPrice(List<Cart> cartList) {
     for (final cart in cartList) {
       totalPrice += cart.itemPrice * quantity;
     }
-    print('totalPrice: $totalPrice');
+    return totalPrice;
   }
 
   @action
   int incrementItemQuantity(
     int itemQuantity,
-    List<Cart> cartList,
   ) {
     quantity++;
     itemQuantity = quantity;
@@ -37,7 +36,6 @@ abstract class AppControllerBase with Store {
   @action
   int decrementItemQuantity(
     int itemQuantity,
-    List<Cart> cartList,
   ) {
     itemQuantity > 0 ? quantity-- : quantity;
     itemQuantity = quantity;

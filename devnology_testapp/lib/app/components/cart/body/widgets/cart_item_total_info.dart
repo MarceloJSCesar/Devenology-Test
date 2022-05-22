@@ -16,7 +16,7 @@ class CartItemTotalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    appController.totalPrice = cart.itemPrice;
+    appController.totalPrice = cart.itemPrice * cart.itemQuantity;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -29,12 +29,12 @@ class CartItemTotalInfo extends StatelessWidget {
                 'Total',
                 style: AppFonts.cartTotalLabel,
               ),
-              Observer(builder: (_) {
-                return Text(
+              Observer(
+                builder: (_) => Text(
                   '\$ ${appController.totalPrice}',
                   style: AppFonts.cartTotalPrice,
-                );
-              }),
+                ),
+              ),
             ],
           ),
         ),
