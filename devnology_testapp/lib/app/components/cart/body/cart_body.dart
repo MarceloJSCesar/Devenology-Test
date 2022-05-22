@@ -21,6 +21,14 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double calculateTotalPrice() {
+      double totalPrice = 0.0;
+      for (final cart in cartList) {
+        totalPrice += cart.itemPrice * cart.itemQuantity;
+      }
+      return totalPrice;
+    }
+
     AppController appController = AppController();
 
     return Column(
@@ -71,7 +79,7 @@ class CartBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               CartItemTotalInfo(
-                appController: appController,
+                totalPrice: calculateTotalPrice(),
               ),
               CartItemCheckoutButton(
                 onTap: () {

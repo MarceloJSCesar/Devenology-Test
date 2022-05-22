@@ -41,35 +41,8 @@ mixin _$AppController on AppControllerBase, Store {
     });
   }
 
-  late final _$totalPriceAtom =
-      Atom(name: 'AppControllerBase.totalPrice', context: context);
-
-  @override
-  double get totalPrice {
-    _$totalPriceAtom.reportRead();
-    return super.totalPrice;
-  }
-
-  @override
-  set totalPrice(double value) {
-    _$totalPriceAtom.reportWrite(value, super.totalPrice, () {
-      super.totalPrice = value;
-    });
-  }
-
   late final _$AppControllerBaseActionController =
       ActionController(name: 'AppControllerBase', context: context);
-
-  @override
-  double calculateTotalPrice(List<Cart> cartList) {
-    final _$actionInfo = _$AppControllerBaseActionController.startAction(
-        name: 'AppControllerBase.calculateTotalPrice');
-    try {
-      return super.calculateTotalPrice(cartList);
-    } finally {
-      _$AppControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   int incrementItemQuantity(int itemQuantity) {
@@ -97,8 +70,7 @@ mixin _$AppController on AppControllerBase, Store {
   String toString() {
     return '''
 quantity: ${quantity},
-cartListNum: ${cartListNum},
-totalPrice: ${totalPrice}
+cartListNum: ${cartListNum}
     ''';
   }
 }

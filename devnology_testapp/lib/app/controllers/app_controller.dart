@@ -13,17 +13,6 @@ abstract class AppControllerBase with Store {
   @observable
   int cartListNum = 0;
 
-  @observable
-  double totalPrice = 0.0;
-
-  @action
-  double calculateTotalPrice(List<Cart> cartList) {
-    for (final cart in cartList) {
-      totalPrice += cart.itemPrice * cart.itemQuantity;
-    }
-    return totalPrice;
-  }
-
   @action
   int incrementItemQuantity(
     int itemQuantity,
