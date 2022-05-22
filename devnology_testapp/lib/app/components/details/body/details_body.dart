@@ -28,59 +28,61 @@ class DetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverToBoxAdapter(
+    return Column(
+      children: <Widget>[
+        Expanded(
+          flex: 6,
           child: Container(
             margin: const EdgeInsets.only(
               left: 20,
               right: 22,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                DetailsItemLabel(label: itemLabel),
-                DetailsImgSlider(
-                  onPageChanged: (pageIndex) => onPageChanged(pageIndex),
-                  sliderImgList: sliderImgList,
-                ),
-                DetailsImgSliderDots(
-                  sliderImgList: sliderImgList,
-                  sliderImgIndex: sliderImgIndex,
-                ),
-                Text(
-                  'Price:',
-                  style: AppFonts.detailsLabel,
-                ),
-                Text(
-                  '\$ $price',
-                  style: AppFonts.detailsPrice,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: 16,
-                    bottom: 10,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  DetailsItemLabel(label: itemLabel),
+                  DetailsImgSlider(
+                    onPageChanged: (pageIndex) => onPageChanged(pageIndex),
+                    sliderImgList: sliderImgList,
                   ),
-                  child: Text(
-                    'About this item:',
-                    style: AppFonts.detailsSubtitle,
+                  DetailsImgSliderDots(
+                    sliderImgList: sliderImgList,
+                    sliderImgIndex: sliderImgIndex,
                   ),
-                ),
-                SizedBox(
-                  width: 333,
-                  height: 144,
-                  child: Text(
-                    description,
-                    style: AppFonts.detailsDescription,
+                  Text(
+                    'Price:',
+                    style: AppFonts.detailsLabel,
                   ),
-                ),
-              ],
+                  Text(
+                    '\$ $price',
+                    style: AppFonts.detailsPrice,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: 16,
+                      bottom: 10,
+                    ),
+                    child: Text(
+                      'About this item:',
+                      style: AppFonts.detailsSubtitle,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 333,
+                    height: 144,
+                    child: Text(
+                      description,
+                      style: AppFonts.detailsDescription,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        SliverFillRemaining(
-          hasScrollBody: false,
+        Expanded(
           child: Column(
             children: <Widget>[
               Expanded(child: Container()),
