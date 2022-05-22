@@ -1,4 +1,4 @@
-import 'package:devnology_testapp/app/database/categories.dart';
+import 'package:devnology_testapp/app/components/categories.dart';
 import 'package:flutter/material.dart';
 
 import '../../category_component.dart';
