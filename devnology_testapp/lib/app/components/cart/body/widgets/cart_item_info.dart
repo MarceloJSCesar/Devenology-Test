@@ -1,14 +1,17 @@
+import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/app_colors.dart';
 import '../../../../config/app_fonts.dart';
 
 class CartItemInfo extends StatelessWidget {
+  final int id;
   final String label;
   final double price;
   final int numQuantity;
   const CartItemInfo({
     Key? key,
+    required this.id,
     required this.label,
     required this.price,
     required this.numQuantity,
@@ -43,6 +46,15 @@ class CartItemInfo extends StatelessWidget {
           Row(
             children: <Widget>[
               GestureDetector(
+                onTap: () async {
+                  // manipulate these variables with state managment
+                  print(numQuantity);
+                  numQuantity - 1;
+                  print(numQuantity);
+                  if (numQuantity == 0) {
+                    await DbHelper().delete(id);
+                  }
+                },
                 child: Container(
                   height: 14,
                   width: 14,
@@ -65,6 +77,9 @@ class CartItemInfo extends StatelessWidget {
                 ),
               ),
               GestureDetector(
+                onTap: () async {
+                  numQuantity + 1;
+                },
                 child: Container(
                   height: 14,
                   width: 14,

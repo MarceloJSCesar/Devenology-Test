@@ -54,6 +54,7 @@ class CartBody extends StatelessWidget {
                             itemImgPath: cartList[index].itemImg,
                           ),
                           CartItemInfo(
+                            id: cartList[index].id as int,
                             label: cartList[index].itemLabel,
                             price: cartList[index].itemPrice,
                             numQuantity: cartList[index].itemQuantity,
@@ -86,9 +87,10 @@ class CartBody extends StatelessWidget {
                         Navigator.of(context)
                             .pushNamed(CheckoutView.checkoutkey);
                         List.generate(
-                            cartList.length,
-                            (index) async => await DbHelper()
-                                .delete(cartList[index].id as int));
+                          cartList.length,
+                          (index) async => await DbHelper()
+                              .delete(cartList[index].id as int),
+                        );
                       },
                       itemArrowRightImg: AppAssets.arrowRight,
                     )
