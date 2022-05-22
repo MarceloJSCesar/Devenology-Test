@@ -23,7 +23,7 @@ class Cart {
     itemQuantity = map[AppDbNames.itemQuantity];
   }
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       AppDbNames.itemImg: itemImg,
       AppDbNames.itemLabel: itemLabel,
