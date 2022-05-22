@@ -1,4 +1,5 @@
 import 'package:devnology_testapp/app/components/cart/appbar/cart_appbar.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  AppController appController = AppController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +41,7 @@ class _CartViewState extends State<CartView> {
                 }
                 return CartBody(
                   cartList: cartItemList,
+                  appController: appController,
                 );
               } else {
                 return const Center(

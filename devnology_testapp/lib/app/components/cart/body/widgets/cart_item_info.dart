@@ -10,16 +10,17 @@ import '../../../../models/cart.dart';
 class CartItemInfo extends StatelessWidget {
   final Cart cartItem;
   final List<Cart> cartList;
+  final AppController appController;
   const CartItemInfo({
     Key? key,
     required this.cartItem,
     required this.cartList,
+    required this.appController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     DbHelper dbHelper = DbHelper();
-    AppController appController = AppController();
     appController.quantity = cartItem.itemQuantity;
     return Container(
       margin: const EdgeInsets.only(left: 22),

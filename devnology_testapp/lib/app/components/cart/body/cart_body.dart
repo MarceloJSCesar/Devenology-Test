@@ -2,6 +2,7 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_img_item
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_checkout_button.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_info.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_total_info.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
 
@@ -13,13 +14,16 @@ import '../../bold_title.dart';
 
 class CartBody extends StatelessWidget {
   final List<Cart> cartList;
+  final AppController appController;
   const CartBody({
     Key? key,
     required this.cartList,
+    required this.appController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int currentCartIndex = 0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,6 +40,7 @@ class CartBody extends StatelessWidget {
           child: ListView.builder(
             itemCount: cartList.length,
             itemBuilder: (context, index) {
+              currentCartIndex = index;
               return Container(
                 margin: const EdgeInsets.only(
                   top: 20,
@@ -50,6 +55,7 @@ class CartBody extends StatelessWidget {
                     CartItemInfo(
                       cartList: cartList,
                       cartItem: cartList[index],
+                      appController: appController,
                     ),
                   ],
                 ),
@@ -65,7 +71,10 @@ class CartBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const CartItemTotalInfo(),
+              CartItemTotalInfo(
+                cart: cartList[currentCartIndex],
+                appController: appController,
+              ),
               CartItemCheckoutButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
