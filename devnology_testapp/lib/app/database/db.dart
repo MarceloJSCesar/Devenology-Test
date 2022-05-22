@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../config/app_dbnames.dart';
+
 class Db {
   static final Db _instance = Db.internal();
   factory Db() => _instance;
@@ -30,5 +32,4 @@ class Db {
       );
     });
   }
-}
 }
