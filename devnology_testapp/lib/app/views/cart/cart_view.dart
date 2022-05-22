@@ -33,7 +33,7 @@ class _CartViewState extends State<CartView> {
                 child: CircularProgressIndicator(),
               );
             default:
-              if (snapshot.hasData) {
+              if (snapshot.hasData && snapshot.data.length > 0) {
                 List<Cart> cartItemList = [];
                 for (var itemCart in snapshot.data) {
                   cartItemList.add(Cart.fromMap(itemCart));
