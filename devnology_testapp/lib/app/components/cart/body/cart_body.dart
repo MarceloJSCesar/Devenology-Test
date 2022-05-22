@@ -5,6 +5,7 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_tot
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../config/app_assets.dart';
 import '../../../config/app_colors.dart';
@@ -21,14 +22,6 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double calculateTotalPrice() {
-      double totalPrice = 0.0;
-      for (final cart in cartList) {
-        totalPrice += cart.itemPrice * cart.itemQuantity;
-      }
-      return totalPrice;
-    }
-
     AppController appController = AppController();
 
     return Column(
@@ -59,6 +52,7 @@ class CartBody extends StatelessWidget {
                       itemImgPath: cartList[index].itemImg,
                     ),
                     CartItemInfo(
+                      cartList: cartList,
                       cartItem: cartList[index],
                     ),
                   ],
@@ -75,9 +69,11 @@ class CartBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              CartItemTotalInfo(
-                totalPrice: calculateTotalPrice(),
-              ),
+              Observer(builder: (context) {
+                return CartItemTotalInfo(
+                  totalPrice: appController.totalPrice,
+                );
+              }),
               CartItemCheckoutButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);

@@ -9,6 +9,22 @@ part of 'app_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AppController on AppControllerBase, Store {
+  late final _$totalPriceAtom =
+      Atom(name: 'AppControllerBase.totalPrice', context: context);
+
+  @override
+  double get totalPrice {
+    _$totalPriceAtom.reportRead();
+    return super.totalPrice;
+  }
+
+  @override
+  set totalPrice(double value) {
+    _$totalPriceAtom.reportWrite(value, super.totalPrice, () {
+      super.totalPrice = value;
+    });
+  }
+
   late final _$quantityAtom =
       Atom(name: 'AppControllerBase.quantity', context: context);
 
@@ -45,22 +61,33 @@ mixin _$AppController on AppControllerBase, Store {
       ActionController(name: 'AppControllerBase', context: context);
 
   @override
-  int incrementItemQuantity(int itemQuantity) {
+  void calculateTotalPrice(List<Cart> cartList) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
-        name: 'AppControllerBase.incrementItemQuantity');
+        name: 'AppControllerBase.calculateTotalPrice');
     try {
-      return super.incrementItemQuantity(itemQuantity);
+      return super.calculateTotalPrice(cartList);
     } finally {
       _$AppControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  int decrementItemQuantity(int itemQuantity) {
+  int incrementItemQuantity(int itemQuantity, List<Cart> cartList) {
+    final _$actionInfo = _$AppControllerBaseActionController.startAction(
+        name: 'AppControllerBase.incrementItemQuantity');
+    try {
+      return super.incrementItemQuantity(itemQuantity, cartList);
+    } finally {
+      _$AppControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  int decrementItemQuantity(int itemQuantity, List<Cart> cartList) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
         name: 'AppControllerBase.decrementItemQuantity');
     try {
-      return super.decrementItemQuantity(itemQuantity);
+      return super.decrementItemQuantity(itemQuantity, cartList);
     } finally {
       _$AppControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -69,6 +96,7 @@ mixin _$AppController on AppControllerBase, Store {
   @override
   String toString() {
     return '''
+totalPrice: ${totalPrice},
 quantity: ${quantity},
 cartListNum: ${cartListNum}
     ''';

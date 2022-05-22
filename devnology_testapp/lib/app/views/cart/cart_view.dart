@@ -26,7 +26,6 @@ class _CartViewState extends State<CartView> {
       body: FutureBuilder(
         future: DbHelper().getAllItems(),
         builder: (context, AsyncSnapshot snapshot) {
-          print('snapshot ${snapshot.data}');
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return const Center(
@@ -38,8 +37,6 @@ class _CartViewState extends State<CartView> {
                 for (var itemCart in snapshot.data) {
                   cartItemList.add(Cart.fromMap(itemCart));
                 }
-                print('data: ${snapshot.data}');
-                print('cartItemList: $cartItemList');
                 return CartBody(
                   cartList: cartItemList,
                 );

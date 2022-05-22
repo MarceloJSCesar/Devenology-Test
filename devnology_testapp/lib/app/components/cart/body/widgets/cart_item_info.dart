@@ -9,9 +9,11 @@ import '../../../../models/cart.dart';
 
 class CartItemInfo extends StatelessWidget {
   final Cart cartItem;
+  final List<Cart> cartList;
   const CartItemInfo({
     Key? key,
     required this.cartItem,
+    required this.cartList,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class CartItemInfo extends StatelessWidget {
                 onTap: () async {
                   appController.decrementItemQuantity(
                     cartItem.itemQuantity,
+                    cartList,
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);
@@ -81,6 +84,7 @@ class CartItemInfo extends StatelessWidget {
                 onTap: () async {
                   appController.incrementItemQuantity(
                     cartItem.itemQuantity,
+                    cartList,
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);
