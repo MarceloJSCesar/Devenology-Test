@@ -139,7 +139,7 @@ class _AppViewState extends State<AppView> {
         activeColor: AppColors.yellowBottomNavigator,
         inactiveColor: AppColors.defaultWhite,
         currentIndex: selectPageIndex,
-        backgroundColor: AppColors.secondary,
+        backgroundColor: AppColors.primary,
         onTap: (selectedPageIndex) {
           setState(() {
             selectPageIndex = selectedPageIndex;

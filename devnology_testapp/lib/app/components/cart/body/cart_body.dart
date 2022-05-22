@@ -41,10 +41,9 @@ class CartBody extends StatelessWidget {
                   marginTop: 30,
                   marginBottom: 20,
                 ),
-                // card item, this builder list according to items added into cart
                 Container(
                   margin: const EdgeInsets.only(top: 20),
-                  height: MediaQuery.of(context).size.height,
+                  height: 230,
                   child: ListView.builder(
                     itemCount: cartList.length,
                     itemBuilder: (context, index) {
