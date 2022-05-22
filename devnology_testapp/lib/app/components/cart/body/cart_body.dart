@@ -59,10 +59,7 @@ class CartBody extends StatelessWidget {
                       itemImgPath: cartList[index].itemImg,
                     ),
                     CartItemInfo(
-                      id: cartList[index].id as int,
-                      label: cartList[index].itemLabel,
-                      price: cartList[index].itemPrice,
-                      numQuantity: cartList[index].itemQuantity,
+                      cartItem: cartList[index],
                     ),
                   ],
                 ),

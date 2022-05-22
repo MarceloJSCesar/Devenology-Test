@@ -35,12 +35,12 @@ class DbHelper {
 
   Future<void> updateCart(Cart cart) async {
     final database = await db;
-
+    print('cart: $cart');
     // Update the given Item in Cart.
     await database.update(
       AppDbNames.storageTable,
       cart.toMap(),
-      where: 'id = ?',
+      where: '${cart.id} = ?',
       whereArgs: [cart.id],
     ).then((value) => print('int from update: $value'));
   }
