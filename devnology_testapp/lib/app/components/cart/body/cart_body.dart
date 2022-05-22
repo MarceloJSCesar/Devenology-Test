@@ -42,24 +42,26 @@ class CartBody extends StatelessWidget {
                   marginTop: 30,
                   marginBottom: 20,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  height: 230,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.62,
                   child: ListView.builder(
                     itemCount: cartList.length,
                     itemBuilder: (context, index) {
-                      return Row(
-                        children: <Widget>[
-                          CartItemImg(
-                            itemImgPath: cartList[index].itemImg,
-                          ),
-                          CartItemInfo(
-                            id: cartList[index].id as int,
-                            label: cartList[index].itemLabel,
-                            price: cartList[index].itemPrice,
-                            numQuantity: cartList[index].itemQuantity,
-                          ),
-                        ],
+                      return Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        child: Row(
+                          children: <Widget>[
+                            CartItemImg(
+                              itemImgPath: cartList[index].itemImg,
+                            ),
+                            CartItemInfo(
+                              id: cartList[index].id as int,
+                              label: cartList[index].itemLabel,
+                              price: cartList[index].itemPrice,
+                              numQuantity: cartList[index].itemQuantity,
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),

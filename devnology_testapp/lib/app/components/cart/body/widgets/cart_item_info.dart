@@ -20,7 +20,6 @@ class CartItemInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int quantity = numQuantity;
     AppController appController = AppController();
     return Observer(
       builder: (context) => Container(
@@ -51,7 +50,8 @@ class CartItemInfo extends StatelessWidget {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    appController.decrementItemQuantity(quantity);
+                    appController.decrementItemQuantity(numQuantity);
+                    print('decrement: $numQuantity');
                   },
                   child: Container(
                     height: 14,
@@ -70,15 +70,14 @@ class CartItemInfo extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(left: 11),
                   child: Text(
-                    '${appController.quantity}',
+                    appController.quantity.toString(),
                     style: AppFonts.cartNumText,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    print(quantity);
-                    quantity = appController.incrementItemQuantity(numQuantity);
-                    print(quantity);
+                    appController.incrementItemQuantity(numQuantity);
+                    print('increment: $numQuantity');
                   },
                   child: Container(
                     height: 14,
