@@ -26,15 +26,10 @@ class DbHelper {
         where: '${AppDbNames.id} = ?', whereArgs: [id]);
   }
 
-  Future<List<Cart>> getAllItems() async {
+  Future<List<Map>> getAllItems() async {
     Database database = await db;
     List<Map> cartItemListFound =
         await database.rawQuery('SELECT * FROM ${AppDbNames.storageTable}');
-    List<Cart> cartItemList = [];
-    for (Map cart in cartItemListFound) {
-      cartItemList.add(Cart.fromMap(cart));
-    }
-    print(cartItemList);
-    return cartItemList;
+    return cartItemListFound;
   }
 }

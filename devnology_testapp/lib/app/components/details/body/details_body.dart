@@ -109,7 +109,7 @@ class DetailsBody extends StatelessWidget {
                     DetailsBottomButton(
                       color: AppColors.primary,
                       label: 'ADD TO CART',
-                      onTap: () {
+                      onTap: () async {
                         final cart = Cart(
                           id: latestItem.id,
                           itemImg: latestItem.img,
@@ -117,8 +117,8 @@ class DetailsBody extends StatelessWidget {
                           itemPrice: latestItem.price,
                           itemQuantity: itemQuantity + 1,
                         );
-                        dbHelper.addItemToCart(cart);
                         Navigator.of(context).pushNamed(CartView.cartkey);
+                        await dbHelper.addItemToCart(cart);
                       },
                       assetImg: AppAssets.arrowRight,
                       textStyle: AppFonts.detailsAddToCart,

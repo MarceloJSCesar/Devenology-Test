@@ -1,5 +1,6 @@
 import 'package:devnology_testapp/app/components/cart/appbar/cart_appbar.dart';
 import 'package:devnology_testapp/app/database/db_helper.dart';
+import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/cart/body/cart_body.dart';
@@ -25,6 +26,7 @@ class _CartViewState extends State<CartView> {
       body: FutureBuilder(
         future: DbHelper().getAllItems(),
         builder: (context, AsyncSnapshot snapshot) {
+          print('snapshot ${snapshot.data}');
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return const Center(
@@ -32,9 +34,14 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData) {
-                print(snapshot.data);
+                List<Cart> cartItemList = [];
+                for (var itemCart in snapshot.data) {
+                  cartItemList.add(Cart.fromMap(itemCart));
+                }
+                print('data: ${snapshot.data}');
+                print('cartItemList: $cartItemList');
                 return CartBody(
-                  cartList: snapshot.data,
+                  cartList: cartItemList,
                 );
               } else {
                 return const Center(
