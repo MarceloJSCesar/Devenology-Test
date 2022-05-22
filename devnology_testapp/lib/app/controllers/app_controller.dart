@@ -16,7 +16,7 @@ abstract class AppControllerBase with Store {
   @action
   double calculatingTotalPriceDecrementing(List<Cart> cartList) {
     for (final cart in cartList) {
-      totalPrice = totalPrice - (cart.itemPrice * cart.itemQuantity);
+      totalPrice = (totalPrice - cart.itemPrice) * cart.itemQuantity;
     }
     return totalPrice;
   }
@@ -24,7 +24,7 @@ abstract class AppControllerBase with Store {
   @action
   double calculatingTotalPriceIncrementing(List<Cart> cartList) {
     for (final cart in cartList) {
-      totalPrice = totalPrice + (cart.itemPrice * cart.itemQuantity);
+      totalPrice = (totalPrice + cart.itemPrice) * cart.itemQuantity;
     }
     return totalPrice;
   }

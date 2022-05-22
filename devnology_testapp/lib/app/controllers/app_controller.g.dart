@@ -41,22 +41,6 @@ mixin _$AppController on AppControllerBase, Store {
     });
   }
 
-  late final _$cartListNumAtom =
-      Atom(name: 'AppControllerBase.cartListNum', context: context);
-
-  @override
-  int get cartListNum {
-    _$cartListNumAtom.reportRead();
-    return super.cartListNum;
-  }
-
-  @override
-  set cartListNum(int value) {
-    _$cartListNumAtom.reportWrite(value, super.cartListNum, () {
-      super.cartListNum = value;
-    });
-  }
-
   late final _$AppControllerBaseActionController =
       ActionController(name: 'AppControllerBase', context: context);
 
@@ -108,8 +92,7 @@ mixin _$AppController on AppControllerBase, Store {
   String toString() {
     return '''
 totalPrice: ${totalPrice},
-quantity: ${quantity},
-cartListNum: ${cartListNum}
+quantity: ${quantity}
     ''';
   }
 }
