@@ -12,10 +12,14 @@ import '../../../database/db_helper.dart';
 import '../../bold_title.dart';
 
 class CartBody extends StatelessWidget {
+  final Function decrement;
+  final Function increment;
   final List<Cart> cartList;
   const CartBody({
     Key? key,
     required this.cartList,
+    required this.decrement,
+    required this.increment,
   }) : super(key: key);
 
   @override
@@ -54,6 +58,8 @@ class CartBody extends StatelessWidget {
                             itemImgPath: cartList[index].itemImg,
                           ),
                           CartItemInfo(
+                            decrement: () => decrement(),
+                            increment: () => increment(),
                             id: cartList[index].id as int,
                             label: cartList[index].itemLabel,
                             price: cartList[index].itemPrice,
