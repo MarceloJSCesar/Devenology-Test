@@ -1,16 +1,18 @@
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../config/app_fonts.dart';
 
 class CartItemTotalInfo extends StatelessWidget {
-  final double totalPrice;
   const CartItemTotalInfo({
     Key? key,
-    required this.totalPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AppController appController = AppController();
+    print('totalPrice01: ${appController.totalPrice}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -23,10 +25,12 @@ class CartItemTotalInfo extends StatelessWidget {
                 'Total',
                 style: AppFonts.cartTotalLabel,
               ),
-              Text(
-                '\$ $totalPrice',
-                style: AppFonts.cartTotalPrice,
-              ),
+              Observer(builder: (_) {
+                return Text(
+                  '\$ ${appController.totalPrice}',
+                  style: AppFonts.cartTotalPrice,
+                );
+              }),
             ],
           ),
         ),

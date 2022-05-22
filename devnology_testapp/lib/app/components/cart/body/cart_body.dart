@@ -2,10 +2,8 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_img_item
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_checkout_button.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_info.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_total_info.dart';
-import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../config/app_assets.dart';
 import '../../../config/app_colors.dart';
@@ -22,8 +20,6 @@ class CartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppController appController = AppController();
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,11 +65,7 @@ class CartBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Observer(builder: (context) {
-                return CartItemTotalInfo(
-                  totalPrice: appController.totalPrice,
-                );
-              }),
+              const CartItemTotalInfo(),
               CartItemCheckoutButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);

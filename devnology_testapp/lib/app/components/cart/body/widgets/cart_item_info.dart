@@ -55,6 +55,7 @@ class CartItemInfo extends StatelessWidget {
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);
+                  appController.calculateTotalPrice(cartList);
                   print('decrement: ${cartItem.itemQuantity}');
                 },
                 child: Container(
@@ -88,6 +89,7 @@ class CartItemInfo extends StatelessWidget {
                   );
                   cartItem.itemQuantity = appController.quantity;
                   await dbHelper.updateCart(cartItem);
+                  appController.calculateTotalPrice(cartList);
                   print('increment: ${cartItem.itemQuantity}');
                 },
                 child: Container(
