@@ -13,9 +13,9 @@ import '../../../views/checkout/checkout_view.dart';
 import '../../bold_title.dart';
 
 class CartBody extends StatelessWidget {
+  final double totalPrice;
   final List<Cart> cartList;
   final AppController appController;
-  final double totalPrice;
   const CartBody({
     Key? key,
     required this.cartList,
@@ -53,7 +53,6 @@ class CartBody extends StatelessWidget {
                       itemImgPath: cartList[index].itemImg,
                     ),
                     CartItemInfo(
-                      cartList: cartList,
                       cartItem: cartList[index],
                       appController: appController,
                     ),

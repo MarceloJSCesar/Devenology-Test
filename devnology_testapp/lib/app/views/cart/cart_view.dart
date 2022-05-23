@@ -16,6 +16,7 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  double totalPrice = 0.0;
   AppController appController = AppController();
 
   @override
@@ -26,8 +27,8 @@ class _CartViewState extends State<CartView> {
         child: CartAppBar(),
       ),
       // get data throught database
-      body: FutureBuilder(
-        future: DbHelper().getAllItems(),
+      body: StreamBuilder(
+        stream: DbHelper().getAllItems().asStream(),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -39,13 +40,16 @@ class _CartViewState extends State<CartView> {
                 List<Cart> cartItemList = [];
                 for (var itemCart in snapshot.data) {
                   cartItemList.add(Cart.fromMap(itemCart));
+                  if (Cart.fromMap(itemCart).itemQuantity == 0) {
+                    DbHelper().delete(Cart.fromMap(itemCart).id as int);
+                    cartItemList.remove(Cart.fromMap(itemCart));
+                  }
                 }
 
                 return CartBody(
                   cartList: cartItemList,
                   appController: appController,
-                  totalPrice: appController
-                      .calculatingTotalPriceIncrementing(cartItemList),
+                  totalPrice: totalPrice,
                 );
               } else {
                 return const Center(

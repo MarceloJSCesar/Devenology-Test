@@ -8,26 +8,7 @@ class AppController = AppControllerBase with _$AppController;
 
 abstract class AppControllerBase with Store {
   @observable
-  double totalPrice = 0.0;
-
-  @observable
   int quantity = 1;
-
-  @action
-  double calculatingTotalPriceDecrementing(List<Cart> cartList) {
-    for (final cart in cartList) {
-      totalPrice = (totalPrice - cart.itemPrice) * cart.itemQuantity;
-    }
-    return totalPrice;
-  }
-
-  @action
-  double calculatingTotalPriceIncrementing(List<Cart> cartList) {
-    for (final cart in cartList) {
-      totalPrice = (totalPrice + cart.itemPrice) * cart.itemQuantity;
-    }
-    return totalPrice;
-  }
 
   @action
   int incrementItemQuantity(
