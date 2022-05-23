@@ -67,9 +67,14 @@ class _CartViewState extends State<CartView> {
                   },
                   decrement: (cartItem) async {
                     setState(() {
-                      print('ho: $cartItem');
-                      cartItem.itemQuantity--;
-                      DbHelper().updateCart(cartItem);
+                      if (cartItem.itemQuantity > 0) {
+                        print('he: $cartItem');
+                        cartItem.itemQuantity--;
+                        DbHelper().updateCart(cartItem);
+                        if (cartItem.itemQuantity == 0) {
+                          DbHelper().delete(cartItem.id);
+                        }
+                      }
                     });
                   },
                 );
