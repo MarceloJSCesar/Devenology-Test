@@ -40,7 +40,7 @@ class DbHelper {
     await database.update(
       AppDbNames.storageTable,
       cart.toMap(),
-      where: '${cart.id} = ?',
+      where: '${AppDbNames.id} = ?',
       whereArgs: [cart.id],
     ).then((value) => print('int from update: $value'));
   }
