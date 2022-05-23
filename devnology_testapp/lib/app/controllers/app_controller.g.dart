@@ -40,17 +40,6 @@ mixin _$AppController on AppControllerBase, Store {
   }
 
   @override
-  void addItemToCart(Cart itemCart) {
-    final _$actionInfo = _$AppControllerBaseActionController.startAction(
-        name: 'AppControllerBase.addItemToCart');
-    try {
-      return super.addItemToCart(itemCart);
-    } finally {
-      _$AppControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 cartItemList: ${cartItemList}

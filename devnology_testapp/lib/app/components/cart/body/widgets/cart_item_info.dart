@@ -1,7 +1,5 @@
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
-import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../config/app_colors.dart';
 import '../../../../config/app_fonts.dart';
@@ -9,16 +7,19 @@ import '../../../../models/cart.dart';
 
 class CartItemInfo extends StatelessWidget {
   final Cart cartItem;
+  final Function decrement;
+  final Function increment;
   final AppController appController;
   const CartItemInfo({
     Key? key,
     required this.cartItem,
+    required this.increment,
+    required this.decrement,
     required this.appController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    DbHelper dbHelper = DbHelper();
     return Container(
       margin: const EdgeInsets.only(left: 22),
       child: Column(
@@ -46,9 +47,7 @@ class CartItemInfo extends StatelessWidget {
           Row(
             children: <Widget>[
               GestureDetector(
-                onTap: () async {
-                  print('decrement: ${cartItem.itemQuantity}');
-                },
+                onTap: () async => await decrement(),
                 child: Container(
                   height: 14,
                   width: 14,
@@ -63,19 +62,15 @@ class CartItemInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              Observer(
-                builder: (context) => Container(
-                  margin: const EdgeInsets.only(left: 11),
-                  child: Text(
-                    cartItem.itemQuantity.toString(),
-                    style: AppFonts.cartNumText,
-                  ),
+              Container(
+                margin: const EdgeInsets.only(left: 11),
+                child: Text(
+                  cartItem.itemQuantity.toString(),
+                  style: AppFonts.cartNumText,
                 ),
               ),
               GestureDetector(
-                onTap: () async {
-                  print('increment: ${cartItem.itemQuantity}');
-                },
+                onTap: () async => await increment(),
                 child: Container(
                   height: 14,
                   width: 14,
