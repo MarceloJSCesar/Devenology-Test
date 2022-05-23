@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../components/cart/body/cart_body.dart';
 import '../../models/cart.dart';
+import '../checkout/checkout_view.dart';
 
 class CartView extends StatefulWidget {
   static int cartPageIndex = 2;
@@ -76,6 +77,13 @@ class _CartViewState extends State<CartView> {
                         }
                       }
                     });
+                  },
+                  jumpToCheckout: () {
+                    Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
+                    for (var cartItem in cartItemList) {
+                      DbHelper().delete(cartItem.id as int);
+                    }
+                    setState(() {});
                   },
                 );
               } else {

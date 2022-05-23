@@ -16,6 +16,7 @@ class CartBody extends StatelessWidget {
   final Function increment;
   final Function decrement;
   final List<Cart> cartItemList;
+  final Function jumpToCheckout;
 
   const CartBody({
     Key? key,
@@ -23,6 +24,7 @@ class CartBody extends StatelessWidget {
     required this.increment,
     required this.totalPrice,
     required this.cartItemList,
+    required this.jumpToCheckout,
   }) : super(key: key);
 
   @override
@@ -77,14 +79,7 @@ class CartBody extends StatelessWidget {
                 totalPrice: totalPrice,
               ),
               CartItemCheckoutButton(
-                onTap: () {
-                  Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
-                  List.generate(
-                    cartItemList.length,
-                    (index) async =>
-                        await DbHelper().delete(cartItemList[index].id as int),
-                  );
-                },
+                onTap: () => jumpToCheckout(),
                 itemArrowRightImg: AppAssets.arrowRight,
               )
             ],
