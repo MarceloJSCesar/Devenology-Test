@@ -1,6 +1,7 @@
 class AppAssets {
   // assets/json file
-  static const String latestItemsJson = 'assets/latest_items.json';
+  static const String latestItemsJson = 'assets/json/latest_items.json';
+  static const String latestBannersJson = 'assets/json/latest_banners.json';
   // assets/logo/
   static const String logo = 'assets/logo/Logo.png';
   // assets/icons/

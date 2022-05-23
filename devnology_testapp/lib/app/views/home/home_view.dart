@@ -39,8 +39,8 @@ class _HomeViewState extends State<HomeView> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: FutureBuilder(
-          future: HomeServices.getLatestItems(),
-          builder: (context, AsyncSnapshot snapshot) {
+          future: HomeServices.getLatestItemsAndBanners(),
+          builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return const Center(
@@ -48,7 +48,13 @@ class _HomeViewState extends State<HomeView> {
                 );
               default:
                 if (snapshot.hasData) {
-                  final List<dynamic> latestItems = snapshot.data;
+                  final List<dynamic> latestBanners =
+                      snapshot.data!['latestBannersData'];
+                  final List<dynamic> latestItems =
+                      snapshot.data!['latestItemsData'];
+
+                  print(
+                      'latestBanners: $latestBanners and latestItems: $latestItems');
                   return SingleChildScrollView(
                     child: HomeBody(
                       latestItems: latestItems,
