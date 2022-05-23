@@ -1,4 +1,6 @@
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
+import 'package:devnology_testapp/app/database/db_helper.dart';
+import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:devnology_testapp/app/views/app_view.dart';
 import 'package:devnology_testapp/app/views/cart/cart_view.dart';
 import 'package:devnology_testapp/app/views/checkout/checkout_view.dart';
@@ -7,12 +9,31 @@ import 'package:devnology_testapp/app/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Devnology extends StatelessWidget {
+class Devnology extends StatefulWidget {
   const Devnology({Key? key}) : super(key: key);
 
   @override
+  State<Devnology> createState() => _DevnologyState();
+}
+
+class _DevnologyState extends State<Devnology> {
+  AppController appController = AppController();
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      DbHelper().getAllItems().then((value) => value
+          .map((e) => appController.addCartToItemList(Cart.fromMap(e)))
+          .toList());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    AppController appController = AppController();
+    DbHelper().getAllItems().then((value) => value
+        .map((e) => appController.addCartToItemList(Cart.fromMap(e)))
+        .toList());
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
       SystemUiOverlay.top,
       SystemUiOverlay.bottom,
@@ -21,6 +42,7 @@ class Devnology extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: AppView.appKey,

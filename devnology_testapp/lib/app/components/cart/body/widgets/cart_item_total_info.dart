@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_formatter/money_formatter.dart';
 
 import '../../../../config/app_fonts.dart';
 
@@ -11,6 +12,7 @@ class CartItemTotalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MoneyFormatter fm = MoneyFormatter(amount: totalPrice);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -24,7 +26,7 @@ class CartItemTotalInfo extends StatelessWidget {
                 style: AppFonts.cartTotalLabel,
               ),
               Text(
-                '\$ ${totalPrice.toStringAsPrecision(6)}',
+                fm.output.symbolOnLeft,
                 style: AppFonts.cartTotalPrice,
               ),
             ],
