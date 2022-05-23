@@ -37,17 +37,15 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData && snapshot.data.length > 0) {
-                List<Cart> cartItemList = [];
                 for (var itemCart in snapshot.data) {
-                  cartItemList.add(Cart.fromMap(itemCart));
-                  if (Cart.fromMap(itemCart).itemQuantity == 0) {
-                    DbHelper().delete(Cart.fromMap(itemCart).id as int);
-                    cartItemList.remove(Cart.fromMap(itemCart));
+                  if (appController.cartItemList.contains(itemCart)) {
+                    print('itemCart is already in the list');
+                  } else {
+                    appController.addItemToCart(Cart.fromMap(itemCart));
                   }
                 }
 
                 return CartBody(
-                  cartList: cartItemList,
                   appController: appController,
                   totalPrice: totalPrice,
                 );
