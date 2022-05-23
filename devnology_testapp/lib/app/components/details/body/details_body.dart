@@ -2,6 +2,7 @@ import 'package:devnology_testapp/app/components/details/body/widgets/details_bo
 import 'package:devnology_testapp/app/components/details/body/widgets/details_img_slider.dart';
 import 'package:devnology_testapp/app/components/details/body/widgets/details_img_slider_dots.dart';
 import 'package:devnology_testapp/app/components/details/body/widgets/details_item_label.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:devnology_testapp/app/models/latest_item.dart';
@@ -17,11 +18,13 @@ class DetailsBody extends StatelessWidget {
   final LatestItem latestItem;
   final Function onPageChanged;
   final List<String> sliderImgList;
+  final AppController appController;
   const DetailsBody({
     Key? key,
     required this.latestItem,
     required this.onPageChanged,
     required this.sliderImgList,
+    required this.appController,
     required this.sliderImgIndex,
   }) : super(key: key);
 
@@ -119,6 +122,7 @@ class DetailsBody extends StatelessWidget {
                         );
                         Navigator.of(context).pushNamed(CartView.cartkey);
                         await dbHelper.addItemToCart(cart);
+                        appController.cartItemList.add(cart);
                       },
                       assetImg: AppAssets.arrowRight,
                       textStyle: AppFonts.detailsAddToCart,
