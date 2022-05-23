@@ -1,10 +1,16 @@
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../config/app_assets.dart';
 import '../../../config/app_colors.dart';
 
 class DetailsAppBar extends StatelessWidget {
-  const DetailsAppBar({Key? key}) : super(key: key);
+  final AppController appController;
+  const DetailsAppBar({
+    Key? key,
+    required this.appController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +58,15 @@ class DetailsAppBar extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColors.yellowBottomNavigator,
                     ),
-                    child: const FittedBox(
-                      child: Text('0'),
+                    child: FittedBox(
+                      child: Observer(
+                        builder: (context) => Text(
+                          appController.cartItemList.length.toString(),
+                        ),
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:devnology_testapp/app/config/app_fonts.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 
 import 'home/home_view.dart';
 import '../config/app_colors.dart';
@@ -10,7 +11,11 @@ import 'package:flutter/cupertino.dart';
 
 class AppView extends StatefulWidget {
   static String appKey = 'APPKEY';
-  const AppView({Key? key}) : super(key: key);
+  final AppController appController;
+  const AppView({
+    Key? key,
+    required this.appController,
+  }) : super(key: key);
 
   @override
   State<AppView> createState() => _AppViewState();
@@ -26,7 +31,9 @@ class _AppViewState extends State<AppView> {
   void initState() {
     super.initState();
     _pages = [
-      const HomeView(),
+      HomeView(
+        appController: widget.appController,
+      ),
       Container(),
       const CartView(),
       Container(),

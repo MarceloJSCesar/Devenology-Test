@@ -1,15 +1,18 @@
 import 'package:devnology_testapp/app/components/details/appbar/details_appbar.dart';
 import 'package:devnology_testapp/app/components/details/body/details_body.dart';
 import 'package:devnology_testapp/app/config/app_colors.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/models/latest_item.dart';
 import 'package:flutter/material.dart';
 
 class DetailsView extends StatefulWidget {
   static String detailskey = 'DETAILSKEY';
   final LatestItem? latestItem;
+  final AppController appController;
   const DetailsView({
     Key? key,
     this.latestItem,
+    required this.appController,
   }) : super(key: key);
 
   @override
@@ -35,9 +38,11 @@ class _DetailsViewState extends State<DetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.defaultWhite,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: DetailsAppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: DetailsAppBar(
+          appController: widget.appController,
+        ),
       ),
       body: DetailsBody(
         latestItem: widget.latestItem as LatestItem,

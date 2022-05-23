@@ -1,3 +1,4 @@
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/latest_item.dart';
@@ -6,9 +7,11 @@ import '../../latest_component.dart';
 
 class LatestItems extends StatelessWidget {
   final List<dynamic> latestItems;
+  final AppController appController;
   const LatestItems({
     Key? key,
     required this.latestItems,
+    required this.appController,
   }) : super(key: key);
 
   @override
@@ -25,6 +28,7 @@ class LatestItems extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => DetailsView(
+                  appController: appController,
                   latestItem: LatestItem.fromMap(latestItems[index]),
                 ),
               ),

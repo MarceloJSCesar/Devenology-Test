@@ -24,10 +24,7 @@ class CheckoutBody extends StatelessWidget {
           ),
           const CheckoutStatusInfo(),
           CheckoutButton(
-            onTap: () {
-              // add this item to database, and pop to jumpTo cartviewpageindex
-              Navigator.of(context).pop();
-            },
+            onTap: () => Navigator.of(context).pop(),
           )
         ],
       ),

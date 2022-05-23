@@ -1,4 +1,5 @@
 import 'package:devnology_testapp/app/components/home/body/home_body.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 
 import '../../config/app_colors.dart';
 import '../../components/home/appbar/home_appbar.dart';
@@ -9,7 +10,11 @@ import '../../services/home/home_services.dart';
 
 class HomeView extends StatefulWidget {
   static String homekey = 'HOMEKEY';
-  const HomeView({Key? key}) : super(key: key);
+  final AppController appController;
+  const HomeView({
+    Key? key,
+    required this.appController,
+  }) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -41,6 +46,7 @@ class _HomeViewState extends State<HomeView> {
                   return SingleChildScrollView(
                     child: HomeBody(
                       latestItems: latestItems,
+                      appController: widget.appController,
                     ),
                   );
                 } else {

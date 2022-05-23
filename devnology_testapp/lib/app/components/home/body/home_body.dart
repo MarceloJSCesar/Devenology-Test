@@ -1,15 +1,18 @@
 import 'package:devnology_testapp/app/components/home/body/widgets/categories_items.dart';
 import 'package:devnology_testapp/app/components/home/body/widgets/latest_banners.dart';
 import 'package:devnology_testapp/app/components/home/body/widgets/latest_items.dart';
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../bold_title.dart';
 
 class HomeBody extends StatelessWidget {
   final List<dynamic> latestItems;
+  final AppController appController;
   const HomeBody({
     Key? key,
     required this.latestItems,
+    required this.appController,
   }) : super(key: key);
 
   @override
@@ -34,6 +37,7 @@ class HomeBody extends StatelessWidget {
           const LatestBanners(),
           LatestItems(
             latestItems: latestItems,
+            appController: appController,
           ),
         ],
       ),

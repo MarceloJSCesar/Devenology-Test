@@ -1,3 +1,4 @@
+import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/views/app_view.dart';
 import 'package:devnology_testapp/app/views/cart/cart_view.dart';
 import 'package:devnology_testapp/app/views/checkout/checkout_view.dart';
@@ -11,6 +12,7 @@ class Devnology extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppController appController = AppController();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
       SystemUiOverlay.top,
       SystemUiOverlay.bottom,
@@ -23,10 +25,14 @@ class Devnology extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppView.appKey,
       routes: {
-        AppView.appKey: (_) => const AppView(),
-        HomeView.homekey: (_) => const HomeView(),
+        AppView.appKey: (_) => AppView(
+              appController: appController,
+            ),
+        HomeView.homekey: (_) => HomeView(appController: appController),
         CartView.cartkey: (_) => const CartView(),
-        DetailsView.detailskey: (_) => const DetailsView(),
+        DetailsView.detailskey: (_) => DetailsView(
+              appController: appController,
+            ),
         CheckoutView.checkoutkey: (_) => const CheckoutView(),
       },
     );
