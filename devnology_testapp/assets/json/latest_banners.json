@@ -7,10 +7,10 @@
             "banner": "assets/icons/banner_1.png"
         },
         {
-            "id": 1,
+            "id": 2,
             "bannerWidth": 325.0,
-            "bannerHeight": 180.44,
-            "banner": "assets/icons/banner_1.png"
+            "bannerHeight": 180.93,
+            "banner": "assets/icons/banner_2.png"
         }
     ]
 }

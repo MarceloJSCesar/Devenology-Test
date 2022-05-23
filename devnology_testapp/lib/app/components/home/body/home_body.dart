@@ -8,11 +8,13 @@ import '../../bold_title.dart';
 
 class HomeBody extends StatelessWidget {
   final List<dynamic> latestItems;
+  final List<dynamic> latestBanners;
   final AppController appController;
   const HomeBody({
     Key? key,
     required this.latestItems,
     required this.appController,
+    required this.latestBanners,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,9 @@ class HomeBody extends StatelessWidget {
             marginTop: 22,
             marginBottom: 10,
           ),
-          const LatestBanners(),
+          LatestBanners(
+            latestBanners: latestBanners,
+          ),
           LatestItems(
             latestItems: latestItems,
             appController: appController,

@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
                   return SingleChildScrollView(
                     child: HomeBody(
                       latestItems: latestItems,
+                      latestBanners: latestBanners,
                       appController: widget.appController,
                     ),
                   );

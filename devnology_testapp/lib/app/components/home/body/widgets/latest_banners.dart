@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
-import '../../../../config/app_assets.dart';
-import '../../../../models/banner.dart';
 
 class LatestBanners extends StatelessWidget {
-  final Banner banner;
-  final List<Banner> latestBanners;
+  final List<dynamic> latestBanners;
   const LatestBanners({
     Key? key,
-    required this.banner,
     required this.latestBanners,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: banner,
+      height: 181,
       width: MediaQuery.of(context).size.width,
-      child: ListView(
+      child: ListView.builder(
+        itemCount: latestBanners.length,
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const <Widget>[
-              Image(
-                image: AssetImage(AppAssets.banner1),
-              ),
-              SizedBox(width: 10),
-              Image(
-                image: AssetImage(AppAssets.banner2),
-              ),
-            ],
-          ),
-        ],
+        itemBuilder: (context, index) {
+          return Container(
+              margin: latestBanners[index]['id'] == 1
+                  ? null
+                  : const EdgeInsets.only(left: 10),
+              child: Image.asset(latestBanners[index]['banner']));
+        },
       ),
     );
   }
