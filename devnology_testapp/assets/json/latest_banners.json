@@ -1,0 +1,16 @@
+{
+    "latest_banners": [
+        {
+            "id": 1,
+            "bannerWidth": 325.0,
+            "bannerHeight": 180.44,
+            "banner": "assets/icons/banner_1.png"
+        },
+        {
+            "id": 1,
+            "bannerWidth": 325.0,
+            "bannerHeight": 180.44,
+            "banner": "assets/icons/banner_1.png"
+        }
+    ]
+}
