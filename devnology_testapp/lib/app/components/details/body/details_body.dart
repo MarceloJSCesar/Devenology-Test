@@ -15,6 +15,7 @@ import '../../../views/cart/cart_view.dart';
 
 class DetailsBody extends StatelessWidget {
   final int sliderImgIndex;
+  final Function refreshState;
   final LatestItem latestItem;
   final Function onPageChanged;
   final List<String> sliderImgList;
@@ -22,6 +23,7 @@ class DetailsBody extends StatelessWidget {
   const DetailsBody({
     Key? key,
     required this.latestItem,
+    required this.refreshState,
     required this.onPageChanged,
     required this.sliderImgList,
     required this.appController,
@@ -123,6 +125,7 @@ class DetailsBody extends StatelessWidget {
                         Navigator.of(context).pushNamed(CartView.cartkey);
                         await dbHelper.addItemToCart(cart);
                         appController.addCartToItemList(cart);
+                        refreshState();
                       },
                       assetImg: AppAssets.arrowRight,
                       textStyle: AppFonts.detailsAddToCart,

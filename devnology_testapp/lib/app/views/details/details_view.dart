@@ -45,6 +45,7 @@ class _DetailsViewState extends State<DetailsView> {
         ),
       ),
       body: DetailsBody(
+        refreshState: () => setState(() {}),
         appController: widget.appController,
         latestItem: widget.latestItem as LatestItem,
         onPageChanged: (pageIndex) => setState(
