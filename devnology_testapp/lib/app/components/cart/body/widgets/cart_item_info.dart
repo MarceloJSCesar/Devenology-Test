@@ -44,7 +44,7 @@ class CartItemInfo extends StatelessWidget {
           Row(
             children: <Widget>[
               GestureDetector(
-                onTap: () async => await decrement(),
+                onTap: () async => await decrement(cartItem),
                 child: Container(
                   height: 14,
                   width: 14,
@@ -67,7 +67,7 @@ class CartItemInfo extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () async => await increment(),
+                onTap: () async => await increment(cartItem),
                 child: Container(
                   height: 14,
                   width: 14,

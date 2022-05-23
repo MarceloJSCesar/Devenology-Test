@@ -15,6 +15,15 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  double calculateTotalPrice(List<Cart> cartItemList) {
+    double totalPrice = 0.0;
+    for (var element in cartItemList) {
+      totalPrice += element.itemPrice * element.itemQuantity;
+    }
+
+    return totalPrice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +42,6 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData && snapshot.data.length > 0) {
-                double totalPrice = 0.0;
                 List<Cart> cartItemList = [];
                 for (var item in snapshot.data) {
                   final cart = Cart.fromMap(item);
@@ -48,8 +56,22 @@ class _CartViewState extends State<CartView> {
                   }
                 }
                 return CartBody(
-                  totalPrice: totalPrice,
+                  totalPrice: calculateTotalPrice(cartItemList),
                   cartItemList: cartItemList,
+                  increment: (cartItem) async {
+                    setState(() {
+                      print('he: $cartItem');
+                      cartItem.itemQuantity++;
+                      DbHelper().updateCart(cartItem);
+                    });
+                  },
+                  decrement: (cartItem) async {
+                    setState(() {
+                      print('ho: $cartItem');
+                      cartItem.itemQuantity--;
+                      DbHelper().updateCart(cartItem);
+                    });
+                  },
                 );
               } else {
                 return const Center(

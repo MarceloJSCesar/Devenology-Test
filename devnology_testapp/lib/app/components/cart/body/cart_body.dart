@@ -11,30 +11,19 @@ import '../../../models/cart.dart';
 import '../../../views/checkout/checkout_view.dart';
 import '../../bold_title.dart';
 
-class CartBody extends StatefulWidget {
+class CartBody extends StatelessWidget {
   final double totalPrice;
+  final Function increment;
+  final Function decrement;
   final List<Cart> cartItemList;
+
   const CartBody({
     Key? key,
+    required this.decrement,
+    required this.increment,
     required this.totalPrice,
     required this.cartItemList,
   }) : super(key: key);
-
-  @override
-  State<CartBody> createState() => _CartBodyState();
-}
-
-class _CartBodyState extends State<CartBody> {
-  double calculateTotalPrice() {
-    double total = 0.0;
-    for (var element in widget.cartItemList) {
-      setState(() {
-        total += element.itemPrice * element.itemQuantity;
-      });
-    }
-
-    return total;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +41,7 @@ class _CartBodyState extends State<CartBody> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: widget.cartItemList.length,
+            itemCount: cartItemList.length,
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(
@@ -63,34 +52,12 @@ class _CartBodyState extends State<CartBody> {
                 child: Row(
                   children: <Widget>[
                     CartItemImg(
-                      itemImgPath: widget.cartItemList[index].itemImg,
+                      itemImgPath: cartItemList[index].itemImg,
                     ),
                     CartItemInfo(
-                      decrement: () async {
-                        setState(() async {
-                          print(
-                              'decr1st: ${widget.cartItemList[index].itemQuantity}');
-                          if (widget.cartItemList[index].itemQuantity > 1) {
-                            widget.cartItemList[index].itemQuantity--;
-                            await DbHelper()
-                                .updateCart(widget.cartItemList[index]);
-                          }
-                          print(
-                              'decr2nd: ${widget.cartItemList[index].itemQuantity}');
-                        });
-                      },
-                      increment: () async {
-                        setState(() async {
-                          print(
-                              'inc1st: ${widget.cartItemList[index].itemQuantity}');
-                          widget.cartItemList[index].itemQuantity--;
-                          await DbHelper()
-                              .updateCart(widget.cartItemList[index]);
-                          print(
-                              'in2nd: ${widget.cartItemList[index].itemQuantity}');
-                        });
-                      },
-                      cartItem: widget.cartItemList[index],
+                      decrement: (cartItem) async => await decrement(cartItem),
+                      increment: (cartItem) async => await increment(cartItem),
+                      cartItem: cartItemList[index],
                     ),
                   ],
                 ),
@@ -107,15 +74,15 @@ class _CartBodyState extends State<CartBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               CartItemTotalInfo(
-                totalPrice: calculateTotalPrice(),
+                totalPrice: totalPrice,
               ),
               CartItemCheckoutButton(
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
                   List.generate(
-                    widget.cartItemList.length,
-                    (index) async => await DbHelper()
-                        .delete(widget.cartItemList[index].id as int),
+                    cartItemList.length,
+                    (index) async =>
+                        await DbHelper().delete(cartItemList[index].id as int),
                   );
                 },
                 itemArrowRightImg: AppAssets.arrowRight,
