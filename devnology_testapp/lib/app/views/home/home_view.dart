@@ -1,3 +1,4 @@
+import 'package:devnology_testapp/app/components/home/body/bodyConnectionWaiting/body_connection_waiting.dart';
 import 'package:devnology_testapp/app/components/home/body/home_body.dart';
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
 
@@ -43,9 +44,7 @@ class _HomeViewState extends State<HomeView> {
           builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const BodyConnectionWaiting();
               default:
                 if (snapshot.hasData) {
                   final List<dynamic> latestBanners =
