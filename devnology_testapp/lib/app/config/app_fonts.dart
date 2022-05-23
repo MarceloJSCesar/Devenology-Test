@@ -68,6 +68,11 @@ class AppFonts {
     color: AppColors.defaultWhite,
     fontWeight: FontWeight.w900,
   );
+  static TextStyle detailsNumQuantity = GoogleFonts.roboto(
+    fontSize: 9,
+    color: AppColors.defaultWhite,
+    fontWeight: FontWeight.w700,
+  );
   // cart
   static TextStyle cartLabel = GoogleFonts.roboto(
     fontSize: 11,

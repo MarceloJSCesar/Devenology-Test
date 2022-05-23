@@ -1,3 +1,4 @@
+import 'package:devnology_testapp/app/config/app_fonts.dart';
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -62,6 +63,7 @@ class DetailsAppBar extends StatelessWidget {
                       child: Observer(
                         builder: (context) => Text(
                           appController.cartItemList.length.toString(),
+                          style: AppFonts.detailsNumQuantity,
                         ),
                       ),
                     ),
