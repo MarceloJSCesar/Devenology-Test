@@ -19,7 +19,6 @@ class CartItemInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DbHelper dbHelper = DbHelper();
-    appController.quantity = cartItem.itemQuantity;
     return Container(
       margin: const EdgeInsets.only(left: 22),
       child: Column(
@@ -48,11 +47,6 @@ class CartItemInfo extends StatelessWidget {
             children: <Widget>[
               GestureDetector(
                 onTap: () async {
-                  appController.decrementItemQuantity(
-                    cartItem.itemQuantity,
-                  );
-                  cartItem.itemQuantity = appController.quantity;
-                  await dbHelper.updateCart(cartItem);
                   print('decrement: ${cartItem.itemQuantity}');
                 },
                 child: Container(
@@ -73,18 +67,13 @@ class CartItemInfo extends StatelessWidget {
                 builder: (context) => Container(
                   margin: const EdgeInsets.only(left: 11),
                   child: Text(
-                    appController.quantity.toString(),
+                    cartItem.itemQuantity.toString(),
                     style: AppFonts.cartNumText,
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: () async {
-                  appController.incrementItemQuantity(
-                    cartItem.itemQuantity,
-                  );
-                  cartItem.itemQuantity = appController.quantity;
-                  await dbHelper.updateCart(cartItem);
                   print('increment: ${cartItem.itemQuantity}');
                 },
                 child: Container(

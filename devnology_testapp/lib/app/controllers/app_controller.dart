@@ -11,33 +11,36 @@ abstract class AppControllerBase with Store {
   @observable
   List<Cart> cartItemList = [];
 
-  @observable
-  int quantity = 1;
-
   @action
-  void addItemToCart(Cart itemCart) {
-    cartItemList.add(itemCart);
-    if (itemCart.itemQuantity == 0) {
-      DbHelper().delete(itemCart.id as int);
-      cartItemList.remove(itemCart);
+  void initCartViewState(Cart cart) {
+    if (cartItemList.isEmpty) {
+      cartItemList.add(cart);
+    } else {
+      if (cartItemList.any((element) => element.id == cart.id)) {
+        null;
+      } else {
+        cartItemList.add(cart);
+      }
     }
   }
 
   @action
-  int incrementItemQuantity(
-    int itemQuantity,
-  ) {
-    quantity++;
-    itemQuantity = quantity;
-    return itemQuantity;
-  }
-
-  @action
-  int decrementItemQuantity(
-    int itemQuantity,
-  ) {
-    itemQuantity > 0 ? quantity-- : quantity;
-    itemQuantity = quantity;
-    return itemQuantity;
+  void addItemToCart(Cart itemCart) {
+    if (cartItemList.isNotEmpty) {
+      for (Cart cart in cartItemList) {
+        if (cart.id == itemCart.id) {
+          cart.itemQuantity += itemCart.itemQuantity;
+          DbHelper().updateCart(cart);
+          return;
+        } else {
+          cartItemList.add(itemCart);
+          DbHelper().addItemToCart(cart);
+          return;
+        }
+      }
+    } else {
+      cartItemList.add(itemCart);
+      DbHelper().addItemToCart(itemCart);
+    }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:devnology_testapp/app/components/cart/appbar/cart_appbar.dart';
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/database/db_helper.dart';
-import 'package:devnology_testapp/app/models/cart.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/cart/body/cart_body.dart';
+import '../../models/cart.dart';
 
 class CartView extends StatefulWidget {
   static int cartPageIndex = 2;
@@ -27,8 +27,8 @@ class _CartViewState extends State<CartView> {
         child: CartAppBar(),
       ),
       // get data throught database
-      body: StreamBuilder(
-        stream: DbHelper().getAllItems().asStream(),
+      body: FutureBuilder(
+        future: DbHelper().getAllItems(),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -37,14 +37,10 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData && snapshot.data.length > 0) {
-                for (var itemCart in snapshot.data) {
-                  if (appController.cartItemList.contains(itemCart)) {
-                    print('itemCart is already in the list');
-                  } else {
-                    appController.addItemToCart(Cart.fromMap(itemCart));
-                  }
+                for (var item in snapshot.data) {
+                  final cart = Cart.fromMap(item);
+                  appController.initCartViewState(cart);
                 }
-
                 return CartBody(
                   appController: appController,
                   totalPrice: totalPrice,
