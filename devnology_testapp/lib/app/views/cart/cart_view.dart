@@ -77,6 +77,8 @@ class _CartViewState extends State<CartView> {
                         DbHelper().updateCart(cartItem);
                         if (cartItem.itemQuantity == 0) {
                           DbHelper().delete(cartItem.id);
+                          widget.appController.cartItemList.removeWhere(
+                              (element) => element.id == cartItem.id);
                         }
                       }
                     });
