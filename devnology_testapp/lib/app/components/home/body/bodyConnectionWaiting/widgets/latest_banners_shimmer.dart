@@ -22,7 +22,7 @@ class LatestBannersShimmer extends StatelessWidget {
       ),
     ];
     return Shimmer.fromColors(
-      baseColor: Colors.red,
+      baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey,
       child: SizedBox(
           height: 181,

@@ -1,10 +1,9 @@
 import 'package:devnology_testapp/app/components/home/body/bodyConnectionWaiting/widgets/latest_banners_shimmer.dart';
+import 'package:devnology_testapp/app/components/home/body/bodyConnectionWaiting/widgets/latest_items_shimmer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../bold_title.dart';
 import '../widgets/categories_items.dart';
-import '../widgets/latest_banners.dart';
-import '../widgets/latest_items.dart';
 
 class BodyConnectionWaiting extends StatelessWidget {
   const BodyConnectionWaiting({Key? key}) : super(key: key);
@@ -29,7 +28,7 @@ class BodyConnectionWaiting extends StatelessWidget {
             marginBottom: 10,
           ),
           LatestBannersShimmer(),
-          // latestItems shimmer
+          LatestItemsShimmer(),
         ],
       ),
     );

@@ -17,7 +17,7 @@ class LatestItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
+      height: 135,
       margin: const EdgeInsets.only(top: 24.56, bottom: 23),
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(

@@ -11,9 +11,11 @@ class HomeServices {
     final String latestItemsResponse =
         await rootBundle.loadString(AppAssets.latestItemsJson);
     final latestItemsData = json.decode(latestItemsResponse);
-    return {
-      'latestBannersData': latestBannerData['latest_banners'],
-      'latestItemsData': latestItemsData['latest_items'],
-    };
+    return Future.delayed(const Duration(seconds: 2), () async {
+      return {
+        'latestBannersData': latestBannerData['latest_banners'],
+        'latestItemsData': latestItemsData['latest_items'],
+      };
+    });
   }
 }
