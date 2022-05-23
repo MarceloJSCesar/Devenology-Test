@@ -8,7 +8,7 @@ class LatestBanners extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 181,
+      height: 180.44,
       width: MediaQuery.of(context).size.width,
       child: ListView(
         scrollDirection: Axis.horizontal,
