@@ -24,7 +24,7 @@ class CartItemTotalInfo extends StatelessWidget {
                 style: AppFonts.cartTotalLabel,
               ),
               Text(
-                '\$ $totalPrice',
+                '\$ ${totalPrice.toStringAsPrecision(6)}',
                 style: AppFonts.cartTotalPrice,
               ),
             ],
