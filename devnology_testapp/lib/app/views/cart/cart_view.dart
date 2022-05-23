@@ -1,5 +1,4 @@
 import 'package:devnology_testapp/app/components/cart/appbar/cart_appbar.dart';
-import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +15,6 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  double totalPrice = 0.0;
-  AppController appController = AppController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +33,23 @@ class _CartViewState extends State<CartView> {
               );
             default:
               if (snapshot.hasData && snapshot.data.length > 0) {
+                double totalPrice = 0.0;
+                List<Cart> cartItemList = [];
                 for (var item in snapshot.data) {
                   final cart = Cart.fromMap(item);
-                  appController.initCartViewState(cart);
+                  if (cartItemList.isEmpty) {
+                    cartItemList.add(cart);
+                  } else {
+                    if (cartItemList.any((element) => element.id == cart.id)) {
+                      null;
+                    } else {
+                      cartItemList.add(cart);
+                    }
+                  }
                 }
                 return CartBody(
-                  appController: appController,
                   totalPrice: totalPrice,
+                  cartItemList: cartItemList,
                 );
               } else {
                 return const Center(

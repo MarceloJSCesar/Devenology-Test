@@ -2,23 +2,22 @@ import 'package:devnology_testapp/app/components/cart/body/widgets/cart_img_item
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_checkout_button.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_info.dart';
 import 'package:devnology_testapp/app/components/cart/body/widgets/cart_item_total_info.dart';
-import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../config/app_assets.dart';
 import '../../../config/app_colors.dart';
 import '../../../database/db_helper.dart';
+import '../../../models/cart.dart';
 import '../../../views/checkout/checkout_view.dart';
 import '../../bold_title.dart';
 
 class CartBody extends StatefulWidget {
   final double totalPrice;
-  final AppController appController;
+  final List<Cart> cartItemList;
   const CartBody({
     Key? key,
     required this.totalPrice,
-    required this.appController,
+    required this.cartItemList,
   }) : super(key: key);
 
   @override
@@ -28,7 +27,7 @@ class CartBody extends StatefulWidget {
 class _CartBodyState extends State<CartBody> {
   double calculateTotalPrice() {
     double total = 0.0;
-    for (var element in widget.appController.cartItemList) {
+    for (var element in widget.cartItemList) {
       setState(() {
         total += element.itemPrice * element.itemQuantity;
       });
@@ -53,7 +52,7 @@ class _CartBodyState extends State<CartBody> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: widget.appController.cartItemList.length,
+            itemCount: widget.cartItemList.length,
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(
@@ -63,43 +62,35 @@ class _CartBodyState extends State<CartBody> {
                 ),
                 child: Row(
                   children: <Widget>[
-                    Observer(
-                      builder: (context) => CartItemImg(
-                        itemImgPath:
-                            widget.appController.cartItemList[index].itemImg,
-                      ),
+                    CartItemImg(
+                      itemImgPath: widget.cartItemList[index].itemImg,
                     ),
                     CartItemInfo(
                       decrement: () async {
                         setState(() async {
                           print(
-                              'decr1st: ${widget.appController.cartItemList[index].itemQuantity}');
-                          if (widget.appController.cartItemList[index]
-                                  .itemQuantity >
-                              1) {
-                            widget.appController.cartItemList[index]
-                                .itemQuantity--;
-                            await DbHelper().updateCart(
-                                widget.appController.cartItemList[index]);
+                              'decr1st: ${widget.cartItemList[index].itemQuantity}');
+                          if (widget.cartItemList[index].itemQuantity > 1) {
+                            widget.cartItemList[index].itemQuantity--;
+                            await DbHelper()
+                                .updateCart(widget.cartItemList[index]);
                           }
                           print(
-                              'decr2nd: ${widget.appController.cartItemList[index].itemQuantity}');
+                              'decr2nd: ${widget.cartItemList[index].itemQuantity}');
                         });
                       },
                       increment: () async {
                         setState(() async {
                           print(
-                              'inc1st: ${widget.appController.cartItemList[index].itemQuantity}');
-                          widget
-                              .appController.cartItemList[index].itemQuantity--;
-                          await DbHelper().updateCart(
-                              widget.appController.cartItemList[index]);
+                              'inc1st: ${widget.cartItemList[index].itemQuantity}');
+                          widget.cartItemList[index].itemQuantity--;
+                          await DbHelper()
+                              .updateCart(widget.cartItemList[index]);
                           print(
-                              'in2nd: ${widget.appController.cartItemList[index].itemQuantity}');
+                              'in2nd: ${widget.cartItemList[index].itemQuantity}');
                         });
                       },
-                      cartItem: widget.appController.cartItemList[index],
-                      appController: widget.appController,
+                      cartItem: widget.cartItemList[index],
                     ),
                   ],
                 ),
@@ -122,9 +113,9 @@ class _CartBodyState extends State<CartBody> {
                 onTap: () {
                   Navigator.of(context).pushNamed(CheckoutView.checkoutkey);
                   List.generate(
-                    widget.appController.cartItemList.length,
-                    (index) async => await DbHelper().delete(
-                        widget.appController.cartItemList[index].id as int),
+                    widget.cartItemList.length,
+                    (index) async => await DbHelper()
+                        .delete(widget.cartItemList[index].id as int),
                   );
                 },
                 itemArrowRightImg: AppAssets.arrowRight,

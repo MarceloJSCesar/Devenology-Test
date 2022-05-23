@@ -1,4 +1,3 @@
-import 'package:devnology_testapp/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/app_colors.dart';
@@ -9,13 +8,11 @@ class CartItemInfo extends StatelessWidget {
   final Cart cartItem;
   final Function decrement;
   final Function increment;
-  final AppController appController;
   const CartItemInfo({
     Key? key,
     required this.cartItem,
     required this.increment,
     required this.decrement,
-    required this.appController,
   }) : super(key: key);
 
   @override
