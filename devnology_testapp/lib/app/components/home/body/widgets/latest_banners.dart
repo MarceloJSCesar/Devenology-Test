@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-
 import '../../../../config/app_assets.dart';
+import '../../../../models/banner.dart';
 
 class LatestBanners extends StatelessWidget {
-  const LatestBanners({Key? key}) : super(key: key);
+  final Banner banner;
+  final List<Banner> latestBanners;
+  const LatestBanners({
+    Key? key,
+    required this.banner,
+    required this.latestBanners,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180.44,
+      height: banner,
       width: MediaQuery.of(context).size.width,
       child: ListView(
         scrollDirection: Axis.horizontal,
