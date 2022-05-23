@@ -55,16 +55,15 @@ class DetailsAppBar extends StatelessWidget {
                   child: Container(
                     width: 13,
                     height: 13,
+                    alignment: Alignment.center,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.yellowBottomNavigator,
                     ),
-                    child: FittedBox(
-                      child: Observer(
-                        builder: (context) => Text(
-                          appController.cartItemList.length.toString(),
-                          style: AppFonts.detailsNumQuantity,
-                        ),
+                    child: Observer(
+                      builder: (context) => Text(
+                        appController.cartItemList.length.toString(),
+                        style: AppFonts.detailsNumQuantity,
                       ),
                     ),
                   ),
