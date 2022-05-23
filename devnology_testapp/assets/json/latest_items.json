@@ -1,0 +1,43 @@
+{
+   "latest_items": [
+       {
+           "id": 1,
+           "price": 717.80,
+           "imgWidth": 80.0,
+           "imgHeight": 80.0,
+           "marginLeft": 0.0,
+           "paddingTop": 6.0,
+           "cardWidth": 101.0,
+           "cardHeight": 135.0,
+           "img": "assets/icons/lenovo_ideapad.png",
+           "label": "Lenovo - IdeaPad L340 15 Gaming Lenovo 15.6\" ThinkPad P15s Gen 1 Laptop, Intel Core i7-10510U Quad-Core, 16GB DDR4 RAM, 512GB SSD, NVIDIA Quadro P520, Windows 10 Pro (20T4001VUS)",
+           "description": "1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520 Windows 10 Pro 64-Bit Edition 1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520"
+        },
+        {
+            "id": 2,
+            "price": 1519.00,
+            "imgWidth": 80.0,
+            "imgHeight": 80.0,
+            "paddingTop": 6.0,
+            "marginLeft": 11.0,
+            "cardWidth": 101.0,
+            "cardHeight": 135.0,
+            "img": "assets/icons/lenovo_thinkpad.png",
+            "label": "Lenovo 15.6\" ThinkPad P15s Gen 1 Laptop, Intel Core i7-10510U Quad-Core, 16GB DDR4 RAM, 512GB SSD, NVIDIA Quadro P520, Windows 10 Pro (20T4001VUS)",
+            "description": "1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520 Windows 10 Pro 64-Bit Edition 1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520"   
+        },
+        {
+            "id": 3,
+            "price": 4699.00,
+            "imgWidth": 80.0,
+            "imgHeight": 56.83,
+            "paddingTop": 16.0,
+            "marginLeft": 11.0,
+            "cardWidth": 101.0,
+            "cardHeight": 135.0,
+            "img": "assets/icons/notebook_lenovo.png",
+            "label": "Notebook Lenovo 2 em 1 Lenovo 15.6\" ThinkPad P15s Gen 1 Laptop, Intel Core i7-10510U Quad-Core, 16GB DDR4 RAM, 512GB SSD, NVIDIA Quadro P520, Windows 10 Pro (20T4001VUS)",
+            "description": "1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520 Windows 10 Pro 64-Bit Edition 1.8 GHz Intel Core i7-10510U Quad-Core Processor 16GB of DDR4 RAM | 512GB SSD 15.6\" 1920 x 1080 IPS Display NVIDIA Quadro P520"   
+        }
+   ]
+}
