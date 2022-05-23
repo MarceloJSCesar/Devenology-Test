@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:devnology_testapp/app/config/app_fonts.dart';
 import 'package:devnology_testapp/app/controllers/app_controller.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'home/home_view.dart';
 import '../config/app_colors.dart';
@@ -82,7 +83,7 @@ class _AppViewState extends State<AppView> {
           ),
           BottomNavigationBarItem(
             icon: Column(
-              children: [
+              children: <Widget>[
                 const Icon(
                   CupertinoIcons.search,
                   size: 32,
@@ -98,10 +99,38 @@ class _AppViewState extends State<AppView> {
           ),
           BottomNavigationBarItem(
             icon: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(
-                  CupertinoIcons.cart,
-                  size: 32,
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        CupertinoIcons.cart,
+                        size: 32,
+                      ),
+                    ),
+                    Positioned(
+                      top: 17,
+                      left: 45,
+                      child: Container(
+                        width: 13,
+                        height: 13,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.yellowBottomNavigator,
+                        ),
+                        child: Observer(
+                          builder: (context) => Text(
+                            widget.appController.cartItemList.length.toString(),
+                            style: AppFonts.detailsNumQuantity,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Text(
                   'Cart',
