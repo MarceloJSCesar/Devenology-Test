@@ -11,7 +11,7 @@ abstract class AppControllerBase with Store {
   List<Cart> cartItemList = [];
 
   @action
-  void initCartViewState(Cart cart) {
+  void addCartToItemList(Cart cart) {
     if (cartItemList.isEmpty) {
       cartItemList.add(cart);
     } else {

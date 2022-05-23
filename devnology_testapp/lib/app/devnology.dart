@@ -29,7 +29,9 @@ class Devnology extends StatelessWidget {
               appController: appController,
             ),
         HomeView.homekey: (_) => HomeView(appController: appController),
-        CartView.cartkey: (_) => const CartView(),
+        CartView.cartkey: (_) => CartView(
+              appController: appController,
+            ),
         DetailsView.detailskey: (_) => DetailsView(
               appController: appController,
             ),

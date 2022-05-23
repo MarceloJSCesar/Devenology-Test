@@ -122,7 +122,7 @@ class DetailsBody extends StatelessWidget {
                         );
                         Navigator.of(context).pushNamed(CartView.cartkey);
                         await dbHelper.addItemToCart(cart);
-                        appController.cartItemList.add(cart);
+                        appController.addCartToItemList(cart);
                       },
                       assetImg: AppAssets.arrowRight,
                       textStyle: AppFonts.detailsAddToCart,

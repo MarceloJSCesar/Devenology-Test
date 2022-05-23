@@ -35,7 +35,9 @@ class _AppViewState extends State<AppView> {
         appController: widget.appController,
       ),
       Container(),
-      const CartView(),
+      CartView(
+        appController: widget.appController,
+      ),
       Container(),
       Container(),
       Container(),

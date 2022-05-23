@@ -3,13 +3,18 @@ import 'package:devnology_testapp/app/database/db_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/cart/body/cart_body.dart';
+import '../../controllers/app_controller.dart';
 import '../../models/cart.dart';
 import '../checkout/checkout_view.dart';
 
 class CartView extends StatefulWidget {
   static int cartPageIndex = 2;
   static String cartkey = 'CARTKEY';
-  const CartView({Key? key}) : super(key: key);
+  final AppController appController;
+  const CartView({
+    Key? key,
+    required this.appController,
+  }) : super(key: key);
 
   @override
   State<CartView> createState() => _CartViewState();
@@ -61,7 +66,6 @@ class _CartViewState extends State<CartView> {
                   cartItemList: cartItemList,
                   increment: (cartItem) async {
                     setState(() {
-                      print('he: $cartItem');
                       cartItem.itemQuantity++;
                       DbHelper().updateCart(cartItem);
                     });
@@ -69,7 +73,6 @@ class _CartViewState extends State<CartView> {
                   decrement: (cartItem) async {
                     setState(() {
                       if (cartItem.itemQuantity > 0) {
-                        print('he: $cartItem');
                         cartItem.itemQuantity--;
                         DbHelper().updateCart(cartItem);
                         if (cartItem.itemQuantity == 0) {
@@ -83,6 +86,7 @@ class _CartViewState extends State<CartView> {
                     for (var cartItem in cartItemList) {
                       DbHelper().delete(cartItem.id as int);
                     }
+                    widget.appController.cartItemList.clear();
                     setState(() {});
                   },
                 );

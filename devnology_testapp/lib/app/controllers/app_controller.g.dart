@@ -29,11 +29,11 @@ mixin _$AppController on AppControllerBase, Store {
       ActionController(name: 'AppControllerBase', context: context);
 
   @override
-  void initCartViewState(Cart cart) {
+  void addCartToItemList(Cart cart) {
     final _$actionInfo = _$AppControllerBaseActionController.startAction(
-        name: 'AppControllerBase.initCartViewState');
+        name: 'AppControllerBase.addCartToItemList');
     try {
-      return super.initCartViewState(cart);
+      return super.addCartToItemList(cart);
     } finally {
       _$AppControllerBaseActionController.endAction(_$actionInfo);
     }
