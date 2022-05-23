@@ -17,6 +17,7 @@ class CartView extends StatefulWidget {
 
 class _CartViewState extends State<CartView> {
   AppController appController = AppController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +40,12 @@ class _CartViewState extends State<CartView> {
                 for (var itemCart in snapshot.data) {
                   cartItemList.add(Cart.fromMap(itemCart));
                 }
+
                 return CartBody(
                   cartList: cartItemList,
                   appController: appController,
+                  totalPrice: appController
+                      .calculatingTotalPriceIncrementing(cartItemList),
                 );
               } else {
                 return const Center(

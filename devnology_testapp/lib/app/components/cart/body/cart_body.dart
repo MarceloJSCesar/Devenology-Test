@@ -15,15 +15,16 @@ import '../../bold_title.dart';
 class CartBody extends StatelessWidget {
   final List<Cart> cartList;
   final AppController appController;
+  final double totalPrice;
   const CartBody({
     Key? key,
     required this.cartList,
+    required this.totalPrice,
     required this.appController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int currentCartIndex = 0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +41,6 @@ class CartBody extends StatelessWidget {
           child: ListView.builder(
             itemCount: cartList.length,
             itemBuilder: (context, index) {
-              currentCartIndex = index;
               return Container(
                 margin: const EdgeInsets.only(
                   top: 20,
@@ -72,8 +72,7 @@ class CartBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               CartItemTotalInfo(
-                cart: cartList[currentCartIndex],
-                appController: appController,
+                totalPrice: totalPrice,
               ),
               CartItemCheckoutButton(
                 onTap: () {
